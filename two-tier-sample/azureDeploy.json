@@ -73,7 +73,7 @@
     "gvmSize": "Standard_A1",
     "fromGatewayLogin": "[parameters('FromGatewayLogin')]",
     "IPAddressPrefix": "10.61",
-    "WebPublicIPName": "VPNPublicIP-Dev_B",
+    "WebPublicIPName": "40.117.60.206",
     "fwpublicIPName": "fwPublicIP",
     "dnsNameForFwPublicIP": "[parameters('FirewallDnsName')]",
     "dnsNameForWebPublicIP": "[parameters('WebServerDnsName')]",

@@ -72,8 +72,8 @@
     "fwVmSize": "[parameters('FirewallVmSize')]",
     "gvmSize": "Standard_A1",
     "fromGatewayLogin": "[parameters('FromGatewayLogin')]",
-    "IPAddressPrefix": "10.5",
-    "WebPublicIPName": "WebPublicIP",
+    "IPAddressPrefix": "10.61",
+    "WebPublicIPName": "VPNPublicIP-Dev_B",
     "fwpublicIPName": "fwPublicIP",
     "dnsNameForFwPublicIP": "[parameters('FirewallDnsName')]",
     "dnsNameForWebPublicIP": "[parameters('WebServerDnsName')]",
@@ -144,18 +144,6 @@
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
         "dnsSettings": {
           "domainNameLabel": "[variables('dnsnamefw')]"
-        }
-      }
-    },
-    {
-      "apiVersion": "[variables('apiVersion')]",
-      "type": "Microsoft.Network/publicIPAddresses",
-      "name": "[variables('WebPublicIPName')]",
-      "location": "[variables('location')]",
-      "properties": {
-        "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
-        "dnsSettings": {
-          "domainNameLabel": "[variables('dnsnameweb')]"
         }
       }
     },

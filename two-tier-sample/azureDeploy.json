@@ -22,6 +22,13 @@
       },
       "defaultValue": "pan-web"
     },
+    "VPNDnsName": {
+      "type": "string",
+      "metadata": {
+        "description": "Unique DNS name doe the Public IP for the firewall's VPN interface."
+      },
+      "defaultValue": "vpnpublicip-devb"
+    },
     "FirewallVmName": {
       "type": "string",
       "metadata": {
@@ -73,10 +80,11 @@
     "gvmSize": "Standard_A1",
     "fromGatewayLogin": "[parameters('FromGatewayLogin')]",
     "IPAddressPrefix": "10.61",
-    "WebPublicIPName": "WebPublicIP",
+    "WebPublicIPName": "VPNPublicIP-Dev_B",
     "fwpublicIPName": "fwPublicIP",
     "dnsNameForFwPublicIP": "[parameters('FirewallDnsName')]",
     "dnsNameForWebPublicIP": "[parameters('WebServerDnsName')]",
+    "dnsNameForVPNPublicIP": "[parameters('VPNDnsName')]",
     "ubuntuOSVersion": "16.04-LTS",
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
@@ -120,6 +128,7 @@
     "routeTableTrust": "Trust-to-intranetwork",
     "dnsnamefw": "[concat(variables('dnsNameForFwPublicIP'), variables('unqString'))]",
     "dnsnameweb": "[concat(variables('dnsNameForWebPublicIP'), variables('unqString'))]",
+    "dnsnamevpn": "[concat(variables('dnsNameForVPNPublicIP'), variables('unqString'))]",
     "web-vm-name": "webserver-vm",
     "db-vm-name": "database-vm"
 
@@ -154,11 +163,9 @@
       "location": "[variables('location')]",
       "properties": {        
         "dnsSettings": {
-          "domainNameLabel": "[variables('dnsnameweb')]"
+          "domainNameLabel": "[variables('dnsnamevpn')]"
         },
-        "publicIPAddress": {
-          "id":"[resourceId('Microsoft.Network/publicIPAddresses','VPNPublicIP-Dev_B')]"
-          }
+        "publicIPAllocationMethod": "Static"
       }
     },
     {

@@ -6,7 +6,8 @@
         "type": "string",
         "metadata": {
           "description": "This is the name of the your storage account. Enter up to 20 characters"
-        }
+        },
+        "defaultValue": "panazstore"
       },
       "FirewallDnsName": {
         "type": "string",

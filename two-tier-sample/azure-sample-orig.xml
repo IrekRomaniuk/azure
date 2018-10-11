@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<config urldb="paloaltonetworks" version="8.1.0">
+<config version="7.1.0" urldb="paloaltonetworks">
   <mgt-config>
     <users>
       <entry name="paloalto">
@@ -8,7 +8,7 @@
             <superuser>yes</superuser>
           </role-based>
         </permissions>
-        <phash>$1$bntnxkpe$.LMzO6fsqaUL6JGGJpkkE0</phash>
+        <phash>$1$omtpasik$JVuMCKVuxaIHBIkdrbR4k.</phash>
       </entry>
     </users>
   </mgt-config>
@@ -96,11 +96,6 @@
               </layer3>
             </entry>
           </ethernet>
-          <tunnel>
-            <units>
-              <entry name="tunnel.1"/>
-            </units>
-          </tunnel>
         </interface>
         <profiles>
           <monitor-profile>
@@ -149,8 +144,6 @@
                 </encryption>
                 <hash>
                   <member>sha384</member>
-                  <member>sha256</member>
-                  <member>sha512</member>
                 </hash>
                 <dh-group>
                   <member>group20</member>
@@ -216,43 +209,6 @@
               </entry>
             </global-protect-app-crypto-profiles>
           </crypto-profiles>
-          <gateway>
-            <entry name="DC1-Dev_B">
-              <authentication>
-                <pre-shared-key>
-                  <key>-AQ==flWKRUcT+eJFbWeYIZBLzDRTlkk=ImuXtQ8QnOWSZcHpGa82Hg==</key>
-                </pre-shared-key>
-              </authentication>
-              <protocol>
-                <ikev1>
-                  <dpd>
-                    <enable>yes</enable>
-                  </dpd>
-                </ikev1>
-                <ikev2>
-                  <dpd>
-                    <enable>yes</enable>
-                  </dpd>
-                  <ike-crypto-profile>Suite-B-GCM-256</ike-crypto-profile>
-                </ikev2>
-                <version>ikev2</version>
-              </protocol>
-              <protocol-common>
-                <nat-traversal>
-                  <enable>no</enable>
-                </nat-traversal>
-                <fragmentation>
-                  <enable>no</enable>
-                </fragmentation>
-              </protocol-common>
-              <local-address>
-                <interface>ethernet1/1</interface>
-              </local-address>
-              <peer-address>
-                <ip>162.248.249.5</ip>
-              </peer-address>
-            </entry>
-          </gateway>
         </ike>
         <qos>
           <profile>
@@ -307,20 +263,10 @@
                   </graceful-restart>
                 </routing-options>
               </bgp>
-              <rip>
-                <enable>no</enable>
-              </rip>
-              <ospf>
-                <enable>no</enable>
-              </ospf>
-              <ospfv3>
-                <enable>no</enable>
-              </ospfv3>
             </protocol>
             <interface>
               <member>ethernet1/1</member>
               <member>ethernet1/2</member>
-              <member>tunnel.1</member>
             </interface>
             <ecmp>
               <algorithm>
@@ -337,11 +283,6 @@
                     <bfd>
                       <profile>None</profile>
                     </bfd>
-                    <path-monitor>
-                      <enable>no</enable>
-                      <failure-condition>any</failure-condition>
-                      <hold-time>2</hold-time>
-                    </path-monitor>
                     <interface>ethernet1/1</interface>
                     <metric>10</metric>
                     <destination>0.0.0.0/0</destination>
@@ -353,11 +294,6 @@
                     <bfd>
                       <profile>None</profile>
                     </bfd>
-                    <path-monitor>
-                      <enable>no</enable>
-                      <failure-condition>any</failure-condition>
-                      <hold-time>2</hold-time>
-                    </path-monitor>
                     <interface>ethernet1/2</interface>
                     <metric>10</metric>
                     <destination>10.5.3.0/24</destination>
@@ -369,68 +305,15 @@
                     <bfd>
                       <profile>None</profile>
                     </bfd>
-                    <path-monitor>
-                      <enable>no</enable>
-                      <failure-condition>any</failure-condition>
-                      <hold-time>2</hold-time>
-                    </path-monitor>
                     <interface>ethernet1/2</interface>
                     <metric>10</metric>
                     <destination>10.5.4.0/24</destination>
-                  </entry>
-                  <entry name="dc1">
-                    <path-monitor>
-                      <enable>no</enable>
-                      <failure-condition>any</failure-condition>
-                      <hold-time>2</hold-time>
-                    </path-monitor>
-                    <bfd>
-                      <profile>None</profile>
-                    </bfd>
-                    <interface>tunnel.1</interface>
-                    <metric>10</metric>
-                    <destination>10.34.0.0/16</destination>
-                    <route-table>
-                      <unicast/>
-                    </route-table>
-                  </entry>
-                  <entry name="wal">
-                    <path-monitor>
-                      <enable>no</enable>
-                      <failure-condition>any</failure-condition>
-                      <hold-time>2</hold-time>
-                    </path-monitor>
-                    <bfd>
-                      <profile>None</profile>
-                    </bfd>
-                    <interface>tunnel.1</interface>
-                    <metric>10</metric>
-                    <destination>10.29.0.0/16</destination>
-                    <route-table>
-                      <unicast/>
-                    </route-table>
                   </entry>
                 </static-route>
               </ip>
             </routing-table>
           </entry>
         </virtual-router>
-        <tunnel>
-          <ipsec>
-            <entry name="DC1">
-              <auto-key>
-                <ike-gateway>
-                  <entry name="DC1-Dev_B"/>
-                </ike-gateway>
-                <ipsec-crypto-profile>Suite-B-GCM-256</ipsec-crypto-profile>
-              </auto-key>
-              <tunnel-monitor>
-                <enable>no</enable>
-              </tunnel-monitor>
-              <tunnel-interface>tunnel.1</tunnel-interface>
-            </entry>
-          </ipsec>
-        </tunnel>
       </network>
       <deviceconfig>
         <system>
@@ -446,7 +329,7 @@
               </recurring>
             </threats>
           </update-schedule>
-          <timezone>US/Eastern</timezone>
+          <timezone>US/Pacific</timezone>
           <service>
             <disable-telnet>yes</disable-telnet>
             <disable-http>yes</disable-http>
@@ -465,7 +348,6 @@
               <accept-dhcp-domain>no</accept-dhcp-domain>
             </dhcp-client>
           </type>
-          <server-verification>yes</server-verification>
         </system>
         <setting>
           <config>
@@ -509,13 +391,6 @@
             <entry name="db">
               <network>
                 <layer3/>
-              </network>
-            </entry>
-            <entry name="VPN">
-              <network>
-                <layer3>
-                  <member>tunnel.1</member>
-                </layer3>
               </network>
             </entry>
           </zone>
@@ -784,43 +659,13 @@
                   <action>deny</action>
                   <disabled>no</disabled>
                 </entry>
-                <entry name="VPN">
-                  <to>
-                    <member>VPN</member>
-                  </to>
-                  <from>
-                    <member>Trust</member>
-                  </from>
-                  <source>
-                    <member>any</member>
-                  </source>
-                  <destination>
-                    <member>any</member>
-                  </destination>
-                  <source-user>
-                    <member>any</member>
-                  </source-user>
-                  <category>
-                    <member>any</member>
-                  </category>
-                  <application>
-                    <member>any</member>
-                  </application>
-                  <service>
-                    <member>application-default</member>
-                  </service>
-                  <hip-profiles>
-                    <member>any</member>
-                  </hip-profiles>
-                  <action>allow</action>
-                </entry>
               </rules>
             </security>
             <nat>
               <rules>
                 <entry name="Web SSH">
                   <destination-translation>
-                    <translated-address>10.61.3.5</translated-address>
+                    <translated-address>10.5.3.5</translated-address>
                     <translated-port>22</translated-port>
                   </destination-translation>
                   <source-translation>
@@ -840,14 +685,14 @@
                     <member>any</member>
                   </source>
                   <destination>
-                    <member>10.61.1.4</member>
+                    <member>10.5.1.4</member>
                   </destination>
                   <service>service-tcp-221</service>
                   <nat-type>ipv4</nat-type>
                 </entry>
                 <entry name="DB SSH">
                   <destination-translation>
-                    <translated-address>10.61.4.5</translated-address>
+                    <translated-address>10.5.4.5</translated-address>
                     <translated-port>22</translated-port>
                   </destination-translation>
                   <source-translation>
@@ -867,7 +712,7 @@
                     <member>any</member>
                   </source>
                   <destination>
-                    <member>10.61.1.4</member>
+                    <member>10.5.1.4</member>
                   </destination>
                   <service>service-tcp-222</service>
                   <nat-type>ipv4</nat-type>
@@ -875,7 +720,7 @@
                 </entry>
                 <entry name="WordPress NAT">
                   <destination-translation>
-                    <translated-address>10.61.3.5</translated-address>
+                    <translated-address>10.5.3.5</translated-address>
                     <translated-port>80</translated-port>
                   </destination-translation>
                   <source-translation>
@@ -895,7 +740,7 @@
                     <member>any</member>
                   </source>
                   <destination>
-                    <member>10.61.1.4</member>
+                    <member>10.5.1.4</member>
                   </destination>
                   <service>service-http</service>
                   <nat-type>ipv4</nat-type>
@@ -1053,19 +898,12 @@
           </profiles>
           <address>
             <entry name="web-object">
-              <ip-netmask>10.61.3.5</ip-netmask>
+              <ip-netmask>10.5.3.5</ip-netmask>
             </entry>
             <entry name="db-object">
-              <ip-netmask>10.61.4.5</ip-netmask>
+              <ip-netmask>10.5.4.5</ip-netmask>
             </entry>
           </address>
-          <import>
-            <network>
-              <interface>
-                <member>tunnel.1</member>
-              </interface>
-            </network>
-          </import>
         </entry>
       </vsys>
     </entry>

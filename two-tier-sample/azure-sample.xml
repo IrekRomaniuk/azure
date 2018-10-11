@@ -153,7 +153,7 @@
                   <member>sha512</member>
                 </hash>
                 <dh-group>
-                  <member>group20</member>
+                  <member>group2</member>
                 </dh-group>
                 <lifetime>
                   <hours>8</hours>
@@ -196,10 +196,10 @@
                     <member>aes-256-gcm</member>
                   </encryption>
                   <authentication>
-                    <member>none</member>
+                    <member>sha256</member>
                   </authentication>
                 </esp>
-                <dh-group>group20</dh-group>
+                <dh-group>group2</dh-group>
                 <lifetime>
                   <hours>1</hours>
                 </lifetime>
@@ -239,7 +239,7 @@
               </protocol>
               <protocol-common>
                 <nat-traversal>
-                  <enable>no</enable>
+                  <enable>yes</enable>
                 </nat-traversal>
                 <fragmentation>
                   <enable>no</enable>
@@ -251,6 +251,10 @@
               <peer-address>
                 <ip>162.248.249.5</ip>
               </peer-address>
+              <local-id>
+                <id>azure@pa.lab</id>
+                <type>ufqdn</type>
+              </local-id>
             </entry>
           </gateway>
         </ike>
@@ -432,6 +436,15 @@
                   <entry name="DC1-Dev_B"/>
                 </ike-gateway>
                 <ipsec-crypto-profile>Suite-B-GCM-256</ipsec-crypto-profile>
+                <proxy-id>
+                  <entry name="netmgmt">
+                    <protocol>
+                      <any/>
+                    </protocol>
+                    <local>10.61.0.0/16</local>
+                    <remote>10.34.0.0/16</remote>
+                  </entry>
+                </proxy-id>
               </auto-key>
               <tunnel-monitor>
                 <enable>no</enable>

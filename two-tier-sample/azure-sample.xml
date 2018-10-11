@@ -331,62 +331,71 @@
               <ip>
                 <static-route>
                   <entry name="outbound">
-                    <nexthop>
-                      <ip-address>10.5.1.1</ip-address>
-                    </nexthop>
-                    <bfd>
-                      <profile>None</profile>
-                    </bfd>
                     <path-monitor>
                       <enable>no</enable>
                       <failure-condition>any</failure-condition>
                       <hold-time>2</hold-time>
                     </path-monitor>
+                    <nexthop>
+                      <ip-address>10.61.1.1</ip-address>
+                    </nexthop>
+                    <bfd>
+                      <profile>None</profile>
+                    </bfd>
                     <interface>ethernet1/1</interface>
                     <metric>10</metric>
                     <destination>0.0.0.0/0</destination>
+                    <route-table>
+                      <unicast/>
+                    </route-table>
                   </entry>
                   <entry name="to-web">
-                    <nexthop>
-                      <ip-address>10.5.2.1</ip-address>
-                    </nexthop>
-                    <bfd>
-                      <profile>None</profile>
-                    </bfd>
                     <path-monitor>
                       <enable>no</enable>
                       <failure-condition>any</failure-condition>
                       <hold-time>2</hold-time>
                     </path-monitor>
+                    <nexthop>
+                      <ip-address>10.61.2.1</ip-address>
+                    </nexthop>
+                    <bfd>
+                      <profile>None</profile>
+                    </bfd>
                     <interface>ethernet1/2</interface>
                     <metric>10</metric>
-                    <destination>10.5.3.0/24</destination>
+                    <destination>10.61.3.0/24</destination>
+                    <route-table>
+                      <unicast/>
+                    </route-table>
                   </entry>
                   <entry name="to-db">
+                    <path-monitor>
+                      <enable>no</enable>
+                      <failure-condition>any</failure-condition>
+                      <hold-time>2</hold-time>
+                    </path-monitor>
                     <nexthop>
-                      <ip-address>10.5.2.1</ip-address>
+                      <ip-address>10.61.2.1</ip-address>
                     </nexthop>
                     <bfd>
                       <profile>None</profile>
                     </bfd>
-                    <path-monitor>
-                      <enable>no</enable>
-                      <failure-condition>any</failure-condition>
-                      <hold-time>2</hold-time>
-                    </path-monitor>
                     <interface>ethernet1/2</interface>
                     <metric>10</metric>
-                    <destination>10.5.4.0/24</destination>
+                    <destination>10.61.4.0/24</destination>
+                    <route-table>
+                      <unicast/>
+                    </route-table>
                   </entry>
                   <entry name="dc1">
-                    <path-monitor>
-                      <enable>no</enable>
-                      <failure-condition>any</failure-condition>
-                      <hold-time>2</hold-time>
-                    </path-monitor>
                     <bfd>
                       <profile>None</profile>
                     </bfd>
+                    <path-monitor>
+                      <enable>no</enable>
+                      <failure-condition>any</failure-condition>
+                      <hold-time>2</hold-time>
+                    </path-monitor>
                     <interface>tunnel.1</interface>
                     <metric>10</metric>
                     <destination>10.34.0.0/16</destination>
@@ -395,14 +404,14 @@
                     </route-table>
                   </entry>
                   <entry name="wal">
+                    <bfd>
+                      <profile>None</profile>
+                    </bfd>
                     <path-monitor>
                       <enable>no</enable>
                       <failure-condition>any</failure-condition>
                       <hold-time>2</hold-time>
                     </path-monitor>
-                    <bfd>
-                      <profile>None</profile>
-                    </bfd>
                     <interface>tunnel.1</interface>
                     <metric>10</metric>
                     <destination>10.29.0.0/16</destination>
@@ -751,6 +760,36 @@
                     </profiles>
                   </profile-setting>
                 </entry>
+                <entry name="VPN">
+                  <to>
+                    <member>VPN</member>
+                  </to>
+                  <from>
+                    <member>Trust</member>
+                  </from>
+                  <source>
+                    <member>any</member>
+                  </source>
+                  <destination>
+                    <member>any</member>
+                  </destination>
+                  <source-user>
+                    <member>any</member>
+                  </source-user>
+                  <category>
+                    <member>any</member>
+                  </category>
+                  <application>
+                    <member>any</member>
+                  </application>
+                  <service>
+                    <member>application-default</member>
+                  </service>
+                  <hip-profiles>
+                    <member>any</member>
+                  </hip-profiles>
+                  <action>allow</action>
+                </entry>
                 <entry name="Log default deny">
                   <to>
                     <member>any</member>
@@ -783,36 +822,6 @@
                   <log-end>yes</log-end>
                   <action>deny</action>
                   <disabled>no</disabled>
-                </entry>
-                <entry name="VPN">
-                  <to>
-                    <member>VPN</member>
-                  </to>
-                  <from>
-                    <member>Trust</member>
-                  </from>
-                  <source>
-                    <member>any</member>
-                  </source>
-                  <destination>
-                    <member>any</member>
-                  </destination>
-                  <source-user>
-                    <member>any</member>
-                  </source-user>
-                  <category>
-                    <member>any</member>
-                  </category>
-                  <application>
-                    <member>any</member>
-                  </application>
-                  <service>
-                    <member>application-default</member>
-                  </service>
-                  <hip-profiles>
-                    <member>any</member>
-                  </hip-profiles>
-                  <action>allow</action>
                 </entry>
               </rules>
             </security>

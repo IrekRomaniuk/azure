@@ -152,13 +152,13 @@
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('WebPublicIPName')]",
       "location": "[variables('location')]",
-      "publicIPAddress": {
-        "id":"[resourceId('Microsoft.Network/publicIPAddresses','VPNPublicIP-Dev_B')]"
-        },
       "properties": {        
         "dnsSettings": {
           "domainNameLabel": "[variables('dnsnameweb')]"
-        }
+        },
+        "publicIPAddress": {
+          "id":"[resourceId('Microsoft.Network/publicIPAddresses','VPNPublicIP-Dev_B')]"
+          }
       }
     },
     {

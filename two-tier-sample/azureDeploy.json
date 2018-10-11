@@ -7,7 +7,7 @@
         "metadata": {
           "description": "This is the name of the your storage account. Enter up to 20 characters"
         },
-        "defaultValue": "panazstore"
+        "defaultValue": "pan-fw"
       },
       "FirewallDnsName": {
         "type": "string",
@@ -73,7 +73,7 @@
       "fwVmSize": "[parameters('FirewallVmSize')]",
       "gvmSize": "Standard_A1",
       "fromGatewayLogin": "[parameters('FromGatewayLogin')]",
-      "IPAddressPrefix": "10.5",
+      "IPAddressPrefix": "10.61",
       "WebPublicIPName": "WebPublicIP",
       "fwpublicIPName": "fwPublicIP",
       "dnsNameForFwPublicIP": "[parameters('FirewallDnsName')]",

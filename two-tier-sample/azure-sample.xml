@@ -8,7 +8,7 @@
             <superuser>yes</superuser>
           </role-based>
         </permissions>
-        <phash>$1$yiduscas$A/zep.0miF8stKwUYnT8T1</phash>
+        <phash>$1$mckbnkvs$vNeKVfJSWl8iTAZZc1tAm.</phash>
       </entry>
     </users>
   </mgt-config>
@@ -568,7 +568,7 @@
                     <member>Untrust</member>
                   </from>
                   <source>
-                    <member>any</member>
+                    <member>g-public-trusted</member>
                   </source>
                   <destination>
                     <member>any</member>
@@ -602,7 +602,7 @@
                     <member>Untrust</member>
                   </from>
                   <source>
-                    <member>any</member>
+                    <member>g-public-trusted</member>
                   </source>
                   <destination>
                     <member>any</member>
@@ -669,7 +669,7 @@
                     <member>Untrust</member>
                   </from>
                   <source>
-                    <member>any</member>
+                    <member>g-public-trusted</member>
                   </source>
                   <destination>
                     <member>any</member>
@@ -910,7 +910,7 @@
                     <member>Untrust</member>
                   </from>
                   <source>
-                    <member>vpn-peer</member>
+                    <member>g-public-trusted</member>
                   </source>
                   <destination>
                     <member>10.61.1.4</member>
@@ -1164,6 +1164,12 @@
             <entry name="fwVNET">
               <ip-netmask>10.61.0.0/16</ip-netmask>
             </entry>
+            <entry name="isp1">
+              <ip-netmask>162.248.249.0/24</ip-netmask>
+            </entry>
+            <entry name="isp2">
+              <ip-netmask>209.160.129.0/24</ip-netmask>
+            </entry>
           </address>
           <import>
             <network>
@@ -1172,6 +1178,14 @@
               </interface>
             </network>
           </import>
+          <address-group>
+            <entry name="g-public-trusted">
+              <static>
+                <member>isp1</member>
+                <member>isp2</member>
+              </static>
+            </entry>
+          </address-group>
         </entry>
       </vsys>
     </entry>

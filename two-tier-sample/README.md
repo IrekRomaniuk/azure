@@ -13,7 +13,7 @@ This ARM template deploys a VM-Series next generation firewall VM in an Azure re
 
 [<img src="https://camo.githubusercontent.com/536ab4f9bc823c2e0ce72fb610aafda57d8c6c12/687474703a2f2f61726d76697a2e696f2f76697375616c697a65627574746f6e2e706e67" data-canonical-src="http://armviz.io/visualizebutton.png" style="max-width:100%;">](https://raw.githubusercontent.com/IrekRomaniuk/azure/master/two-tier-sample/azureDeploy.json)
 <br/>
-### Addresses
+### Addresses:
 
-- webserver-vm 10.x.3.5
-- database-vm  10.x.4.5
+- webserver-vm: 10.x.3.5
+- database-vm:  10.x.4.5

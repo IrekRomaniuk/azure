@@ -8,7 +8,7 @@
             <superuser>yes</superuser>
           </role-based>
         </permissions>
-        <phash>$1$bntnxkpe$.LMzO6fsqaUL6JGGJpkkE0</phash>
+        <phash>$1$yiduscas$A/zep.0miF8stKwUYnT8T1</phash>
       </entry>
     </users>
   </mgt-config>
@@ -436,15 +436,6 @@
                   <entry name="DC1-Dev_B"/>
                 </ike-gateway>
                 <ipsec-crypto-profile>Suite-B-GCM-256</ipsec-crypto-profile>
-                <proxy-id>
-                  <entry name="netmgmt">
-                    <protocol>
-                      <any/>
-                    </protocol>
-                    <local>10.61.0.0/16</local>
-                    <remote>10.34.0.0/16</remote>
-                  </entry>
-                </proxy-id>
               </auto-key>
               <tunnel-monitor>
                 <enable>no</enable>
@@ -773,7 +764,7 @@
                     </profiles>
                   </profile-setting>
                 </entry>
-                <entry name="VPN">
+                <entry name="VPN outbound">
                   <to>
                     <member>VPN</member>
                   </to>
@@ -797,6 +788,66 @@
                   </application>
                   <service>
                     <member>application-default</member>
+                  </service>
+                  <hip-profiles>
+                    <member>any</member>
+                  </hip-profiles>
+                  <action>allow</action>
+                </entry>
+                <entry name="VPN inbound">
+                  <to>
+                    <member>Trust</member>
+                  </to>
+                  <from>
+                    <member>VPN</member>
+                  </from>
+                  <source>
+                    <member>any</member>
+                  </source>
+                  <destination>
+                    <member>any</member>
+                  </destination>
+                  <source-user>
+                    <member>any</member>
+                  </source-user>
+                  <category>
+                    <member>any</member>
+                  </category>
+                  <application>
+                    <member>any</member>
+                  </application>
+                  <service>
+                    <member>application-default</member>
+                  </service>
+                  <hip-profiles>
+                    <member>any</member>
+                  </hip-profiles>
+                  <action>allow</action>
+                </entry>
+                <entry name="VPN control">
+                  <to>
+                    <member>Untrust</member>
+                  </to>
+                  <from>
+                    <member>Untrust</member>
+                  </from>
+                  <source>
+                    <member>fwVNET</member>
+                  </source>
+                  <destination>
+                    <member>vpn-peer</member>
+                  </destination>
+                  <source-user>
+                    <member>any</member>
+                  </source-user>
+                  <category>
+                    <member>any</member>
+                  </category>
+                  <application>
+                    <member>any</member>
+                  </application>
+                  <service>
+                    <member>any</member>
                   </service>
                   <hip-profiles>
                     <member>any</member>
@@ -864,7 +915,7 @@
                   <destination>
                     <member>10.61.1.4</member>
                   </destination>
-                  <service>service-tcp-221</service>
+                  <service>any</service>
                   <nat-type>ipv4</nat-type>
                 </entry>
                 <entry name="DB SSH">
@@ -891,7 +942,7 @@
                   <destination>
                     <member>10.61.1.4</member>
                   </destination>
-                  <service>service-tcp-222</service>
+                  <service>any</service>
                   <nat-type>ipv4</nat-type>
                   <disabled>no</disabled>
                 </entry>
@@ -1079,6 +1130,12 @@
             </entry>
             <entry name="db-object">
               <ip-netmask>10.61.4.5</ip-netmask>
+            </entry>
+            <entry name="vpn-peer">
+              <ip-netmask>162.248.249.5</ip-netmask>
+            </entry>
+            <entry name="fwVNET">
+              <ip-netmask>10.61.0.0/16</ip-netmask>
             </entry>
           </address>
           <import>

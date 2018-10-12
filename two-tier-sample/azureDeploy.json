@@ -14,7 +14,7 @@
         "metadata": {
           "description": "Unique DNS Name for the Public IP used to access PAN Firewall VM."
         },
-        "defaultValue": "pan-fw"
+        "defaultValue": "pan-azrue-fw"
       },
       "WebServerDnsName": {
         "type": "string",
@@ -28,7 +28,7 @@
         "metadata": {
           "description": "Name of VM-Series VM in the portal"
         },
-        "defaultValue": "pan-fw"
+        "defaultValue": "pan-azure-fw"
       },
       "FirewallVmSize": {
         "type": "string",
@@ -740,6 +740,10 @@
         "VMseriesURL":{
           "type": "string",
           "value":"[concat('https://', reference(variables('fwpublicIPName')).dnsSettings.fqdn)]"
+        },
+        "Default credentials":{
+          "type": "string",
+          "value":"[concat(variables('adminUserName'),' ',variables('adminPassword'))]"
         },
         "WebServerURL":{
             "type": "string",

@@ -18,7 +18,7 @@ This ARM template deploys a VM-Series next generation firewall VM in an Azure re
 - webserver-vm: 10.x.3.5
 - database-vm:  10.x.4.5
 
-##### Bypass strict ssk key checking
+##### Bypass strict ssk key checking (important after recreating the lab)
 
 ```
 ssh -o UserKnownHostsFile=/dev/null  paloalto@10.x.3.5

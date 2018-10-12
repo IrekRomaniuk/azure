@@ -464,7 +464,7 @@
             <disable-telnet>yes</disable-telnet>
             <disable-http>yes</disable-http>
           </service>
-          <hostname>pan-fw</hostname>
+          <hostname>pan-azure-fw</hostname>
           <dns-setting>
             <servers>
               <primary>168.63.129.16</primary>
@@ -891,6 +891,33 @@
             </security>
             <nat>
               <rules>
+                <entry name="Web SSH-1">
+                  <destination-translation>
+                    <translated-address>10.61.3.5</translated-address>
+                    <translated-port>22</translated-port>
+                  </destination-translation>
+                  <source-translation>
+                    <dynamic-ip-and-port>
+                      <interface-address>
+                        <interface>ethernet1/2</interface>
+                      </interface-address>
+                    </dynamic-ip-and-port>
+                  </source-translation>
+                  <to>
+                    <member>Untrust</member>
+                  </to>
+                  <from>
+                    <member>Untrust</member>
+                  </from>
+                  <source>
+                    <member>vpn-peer</member>
+                  </source>
+                  <destination>
+                    <member>10.61.1.4</member>
+                  </destination>
+                  <service>service-tcp-22</service>
+                  <nat-type>ipv4</nat-type>
+                </entry>
                 <entry name="Web SSH">
                   <destination-translation>
                     <translated-address>10.61.3.5</translated-address>
@@ -915,7 +942,7 @@
                   <destination>
                     <member>10.61.1.4</member>
                   </destination>
-                  <service>any</service>
+                  <service>service-tcp-221</service>
                   <nat-type>ipv4</nat-type>
                 </entry>
                 <entry name="DB SSH">
@@ -942,7 +969,7 @@
                   <destination>
                     <member>10.61.1.4</member>
                   </destination>
-                  <service>any</service>
+                  <service>service-tcp-222</service>
                   <nat-type>ipv4</nat-type>
                   <disabled>no</disabled>
                 </entry>

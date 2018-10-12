@@ -479,6 +479,12 @@
             </dhcp-client>
           </type>
           <server-verification>yes</server-verification>
+          <permitted-ip>
+            <entry name="10.34.0.0/16"/>
+            <entry name="10.29.0.0/16"/>
+            <entry name="209.160.129.0/24"/>
+            <entry name="162.248.249.0/24"/>
+          </permitted-ip>
         </system>
         <setting>
           <config>

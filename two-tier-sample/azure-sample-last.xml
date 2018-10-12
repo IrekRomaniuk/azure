@@ -156,7 +156,7 @@
                   <member>group2</member>
                 </dh-group>
                 <lifetime>
-                  <hours>4</hours>
+                  <hours>8</hours>
                 </lifetime>
               </entry>
             </ike-crypto-profiles>
@@ -199,9 +199,9 @@
                     <member>sha256</member>
                   </authentication>
                 </esp>
-                <dh-group>no-pfs</dh-group>
+                <dh-group>group2</dh-group>
                 <lifetime>
-                  <hours>4</hours>
+                  <hours>1</hours>
                 </lifetime>
               </entry>
             </ipsec-crypto-profiles>

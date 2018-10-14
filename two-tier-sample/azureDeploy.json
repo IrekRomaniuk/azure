@@ -663,6 +663,25 @@
           }
       },
       {
+        "name": "[concat(variables('web-vm-name'),'/web-vm-cronscript')]",
+        "type": "Microsoft.Compute/virtualMachines/extensions",
+        "apiVersion": "[variables('apiVersion')]",
+        "location": "[variables('location')]",
+        "dependsOn": [
+            "[concat('Microsoft.Compute/virtualMachines/', variables('web-vm-name'))]"
+        ],
+        "properties":
+         {
+              "publisher": "Microsoft.Azure.Extensions",
+              "type": "CustomScript",
+              "typeHandlerVersion": "2.0",
+              "settings": {
+                  "fileUris": ["https://raw.githubusercontent.com/IrekRomaniuk/azure/master/two-tier-sample/config-cron.sh"],
+                  "commandToExecute": "bash config-cron.sh"
+             }
+        }
+    },
+      {
           "apiVersion": "2015-01-01",
           "name": "DBlinkedTemplate",
           "type": "Microsoft.Resources/deployments",

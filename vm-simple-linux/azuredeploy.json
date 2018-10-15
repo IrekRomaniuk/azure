@@ -6,7 +6,8 @@
       "type": "string",
       "metadata": {
         "description": "User name for the Virtual Machine."
-      }
+      },
+      "defaultValue": "docker"
     },
     "adminPassword": {
       "type": "securestring",
@@ -18,7 +19,8 @@
       "type": "string",
       "metadata": {
         "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
-      }
+      },
+      "defaultValue": "[uniqueString(resourceGroup().id)]"
     },
     "ubuntuOSVersion": {
       "type": "string",

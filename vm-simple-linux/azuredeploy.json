@@ -195,30 +195,11 @@
             "type": "CustomScript",
             "typeHandlerVersion": "2.0",
             "settings": {
-                "fileUris": ["https://raw.githubusercontent.com/IrekRomaniuk/azure/master/vm-simple-linux/script1.py"],
-                "commandToExecute": "python script1.py"
+                "fileUris": ["https://raw.githubusercontent.com/IrekRomaniuk/azure/master/vm-simple-linux/script1.py","https://raw.githubusercontent.com/IrekRomaniuk/azure/master/vm-simple-linux/script2.sh"],
+                "commandToExecute": "bash script2.sh script1.py"
            }
       }
-  },
-  {
-    "name": "[concat(variables('vmName'),'/vm-customscript2')]",
-    "type": "Microsoft.Compute/virtualMachines/extensions",
-    "apiVersion": "2018-10-01",
-    "location": "[parameters('location')]",
-    "dependsOn": [
-        "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), '/extensions/vm-customscript')]"
-    ],
-    "properties":
-     {
-          "publisher": "Microsoft.Azure.Extensions",
-          "type": "CustomScript",
-          "typeHandlerVersion": "2.0",
-          "settings": {
-              "fileUris": ["https://raw.githubusercontent.com/IrekRomaniuk/azure/master/vm-simple-linux/script2.sh"],
-              "commandToExecute": "bash script2.sh"
-         }
-    }
-}
+  }
   ],
   "outputs": {
     "hostname": {

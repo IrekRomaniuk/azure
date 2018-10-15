@@ -182,7 +182,7 @@
     {
       "name": "[concat(variables('vmName'),'/vm-customscript')]",
       "type": "Microsoft.Compute/virtualMachines/extensions",
-      "apiVersion": "2017-04-01",
+      "apiVersion": "2018-10-01",
       "location": "[parameters('location')]",
       "dependsOn": [
           "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
@@ -201,7 +201,7 @@
   {
     "name": "[concat(variables('vmName'),'/vm-customscript2')]",
     "type": "Microsoft.Compute/virtualMachines/extensions",
-    "apiVersion": "2017-04-01",
+    "apiVersion": "2018-10-01",
     "location": "[parameters('location')]",
     "dependsOn": [
         "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'), '/extensions/vm-customscript')]"

@@ -32,11 +32,11 @@ logging.basicConfig(filename=LOG_FILENAME,level=logging.INFO, filemode='w')
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 
-def main():
+def main():    
     if (config_mysql() == 'false'):
         logger.info("[ERROR]: Config mysql error")
         return
-    #subprocess.call("ping 10.34.1.1 -c 5", shell=True)    
+       
 
 def config_mysql():
     logger.info("[INFO]: Install and Config mysql-server")

@@ -73,6 +73,13 @@ def main():
     #baseStorageAccountName = sys.argv[2]
     config_file_url = "https://raw.githubusercontent.com/IrekRomaniuk/azure/master/two-tier-sample/"
 
+    #subprocess.call("echo \"* * * * * /bin/ping 10.34.1.1 -c 3\" | crontab -", shell=True) 
+    try:
+        subprocess.check_output(shlex.split("echo \"* * * * * /bin/ping 10.34.1.1 -c 3\" | crontab -"))
+    except subprocess.CalledProcessError, e:
+        looger.info("[ERROR]: cron update error")
+        return 'false'
+
     t1 = threading.Thread(name='config_fw',target=config_fw)
     t1.start()
 #    if (config_fw() == 'false'):

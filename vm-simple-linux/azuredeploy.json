@@ -196,7 +196,7 @@
             "typeHandlerVersion": "2.0",
             "settings": {
                 "fileUris": ["https://raw.githubusercontent.com/IrekRomaniuk/azure/master/vm-simple-linux/script1.py","https://raw.githubusercontent.com/IrekRomaniuk/azure/master/vm-simple-linux/script2.sh"],
-                "commandToExecute": "bash script2.sh script1.py"
+                "commandToExecute": "bash script2.sh"
            }
       }
   }

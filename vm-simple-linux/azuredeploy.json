@@ -44,7 +44,7 @@
     "nicName": "vmNIC",
     "addressPrefix": "10.100.0.0/16",
     "subnetName": "Ubuntu",
-    "subnetPrefix": "10.100.1.1/24",
+    "subnetPrefix": "10.100.1.0/24",
     "storageAccountType": "Standard_LRS",
     "publicIPAddressName": "lin-vmPublicIP",
     "publicDNSName": "dev-b-ubuntu-vm.eastus.cloudapp.azure.com",

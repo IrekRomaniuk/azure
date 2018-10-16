@@ -47,16 +47,16 @@
     "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'salinuxvm')]",
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
-    "nicName": "myVMNic",
+    "nicName": "VMNic",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
     "subnetPrefix": "10.0.0.0/24",
     "storageAccountType": "Standard_LRS",
-    "publicIPAddressName": "myPublicIP",
-    "publicIPAddressType": "Dynamic",
-    "vmName": "MyUbuntuVM",
+    "publicIPAddressName": "pan-fwPublicIP",
+    "publicIPAddressType": "Static",
+    "vmName": "UbuntuVM",
     "vmSize": "Standard_A1",
-    "virtualNetworkName": "MyVNET",
+    "virtualNetworkName": "vmVNET",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]"
   },
   "resources": [
@@ -72,15 +72,15 @@
       "properties": {}
     },
     {
-      "apiVersion": "2017-04-01",
+      "apiVersion": "2017-06-01",
       "type": "Microsoft.Network/publicIPAddresses",
       "name": "[variables('publicIPAddressName')]",
       "location": "[parameters('location')]",
       "properties": {
         "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
-        "dnsSettings": {
-          "domainNameLabel": "[parameters('dnsLabelPrefix')]"
-        }
+        "publicIPAddress": {
+          "id":"[resourceId('cloud-shell-storage-eastus','Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+        }        
       }
     },
     {

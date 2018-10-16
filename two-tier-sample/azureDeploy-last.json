@@ -15,7 +15,14 @@
           "description": "Unique DNS Name for the Public IP used to access PAN Firewall VM."
         },
         "defaultValue": "pan-azrue-fw"
-      },      
+      },
+      "WebServerDnsName": {
+        "type": "string",
+        "metadata": {
+          "description": "Unique DNS name doe the Public IP for the firewall's Data Plane interface."
+        },
+        "defaultValue": "pan-web"
+      },
       "FirewallVmName": {
         "type": "string",
         "metadata": {
@@ -67,11 +74,10 @@
       "gvmSize": "Standard_A1",
       "fromGatewayLogin": "[parameters('FromGatewayLogin')]",
       "IPAddressPrefix": "10.61",
-      "WebPublicIPName": "pan-fwPublicIP",
-      "resourceGroup": "cloud-shell-storage-eastus",
+      "WebPublicIPName": "WebPublicIP",
       "fwpublicIPName": "fwPublicIP",
       "dnsNameForFwPublicIP": "[parameters('FirewallDnsName')]",
-      "dnsNameForWebPublicIP": "dev-b.eastus.cloudapp.azure.com",
+      "dnsNameForWebPublicIP": "[parameters('WebServerDnsName')]",
       "ubuntuOSVersion": "16.04-LTS",
       "imagePublisher": "Canonical",
       "imageOffer": "UbuntuServer",
@@ -139,6 +145,18 @@
           "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
           "dnsSettings": {
             "domainNameLabel": "[variables('dnsnamefw')]"
+          }
+        }
+      },
+      {
+        "apiVersion": "[variables('apiVersion')]",
+        "type": "Microsoft.Network/publicIPAddresses",
+        "name": "[variables('WebPublicIPName')]",
+        "location": "[variables('location')]",
+        "properties": {
+          "publicIPAllocationMethod": "[variables('publicIPAddressType')]",
+          "dnsSettings": {
+            "domainNameLabel": "[variables('dnsnameweb')]"
           }
         }
       },
@@ -367,7 +385,7 @@
                   "privateIPAllocationMethod": "Static",
                   "privateIPAddress": "[variables('FWPrivateIPAddressUntrust')]",
                   "publicIPAddress": {
-                       "id": "[resourceId(variables('resourceGroup'),'Microsoft.Network/publicIPAddresses',variables('WebPublicIPName'))]"
+                       "id": "[resourceId('Microsoft.Network/publicIPAddresses', variables('WebPublicIPName'))]"
                   },
                   "subnet": {
                     "id": "[variables(concat('subnet','1','Ref'))]"
@@ -640,7 +658,7 @@
                 "typeHandlerVersion": "2.0",
                 "settings": {
                     "fileUris": ["https://raw.githubusercontent.com/IrekRomaniuk/azure/master/two-tier-sample/config-fw.py"],
-                    "commandToExecute": "[concat('python config-fw.py ', variables('dnsNameForWebPublicIP'))]"
+                    "commandToExecute": "[concat('python config-fw.py ', reference(variables('WebPublicIPName')).dnsSettings.fqdn)]"
                }
           }
       },      
@@ -729,7 +747,7 @@
         },
         "WebServerURL":{
             "type": "string",
-            "value":"[concat('http://',variables('dnsNameForWebPublicIP'))]"
+            "value":"[concat('http://',reference(variables('WebPublicIPName')).dnsSettings.fqdn)]"
         }
     }
   }

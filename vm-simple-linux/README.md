@@ -8,6 +8,6 @@
 </a>
 
 
-This template allows you to deploy a simple Linux VM using a few different options for the Ubuntu Linux version, using the latest patched version. This will deploy a A1 size VM in the resource group location and return the FQDN of the VM. It is running two scripts: script1.py and script2.sh (second dependent on first) 
+This template allows you to deploy a simple Linux VM using a few different options for the Ubuntu Linux version, using the latest patched version. This will deploy a A1 size VM in the resource group location and return the FQDN of the VM. It is running two scripts: script1.py and script2.sh (second dependent on first). Referencing static IP 'pan-fwPublicIP' created in different resource group 'cloud-shell-storage-eastus'
 
 https://azure.microsoft.com/en-us/blog/automate-linux-vm-customization-tasks-using-customscript-extension/

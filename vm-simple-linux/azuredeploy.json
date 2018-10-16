@@ -45,14 +45,16 @@
   },
   "variables": {
     "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'salinuxvm')]",
+    "resourceGroup": "cloud-shell-storage-eastus",
     "imagePublisher": "Canonical",
     "imageOffer": "UbuntuServer",
-    "nicName": "VMNic",
+    "nicName": "vmNIC",
     "addressPrefix": "10.0.0.0/16",
     "subnetName": "Subnet",
     "subnetPrefix": "10.0.0.0/24",
     "storageAccountType": "Standard_LRS",
     "publicIPAddressName": "pan-fwPublicIP",
+    "publicDNSName": "dev-b.eastus.cloudapp.azure.com",
     "vmName": "UbuntuVM",
     "vmSize": "Standard_A1",
     "virtualNetworkName": "vmVNET",
@@ -106,7 +108,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
-                "id": "[resourceId('cloud-shell-storage-eastus','Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+                "id": "[resourceId(variables('resourceGroup'),'Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
               },
               "subnet": {
                 "id": "[variables('subnetRef')]"
@@ -188,13 +190,13 @@
   }
   ],
   "outputs": {
-    "hostname": {
-      "type": "string",
-      "value": "[variables('publicIPAddressName')]"
-    },
+        "Default credentials":{
+          "type": "string",
+          "value":"[concat(parameters('adminUserName'),' ',parameters('adminPassword'))]"
+        },
     "sshCommand": {
       "type": "string",
-      "value": "[concat('ssh ', parameters('adminUsername'), '@', variables('publicIPAddressName'))]"
+      "value": "[concat('ssh ', parameters('adminUsername'), '@', variables('publicDNSName'))]"
     }
   }
 }

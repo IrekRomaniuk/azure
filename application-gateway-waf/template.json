@@ -1,0 +1,354 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "publicIPAddresses_AGPublicIPAddress_domainNameLabel": {
+            "defaultValue": null,
+            "type": "SecureString"
+        },
+        "virtualNetworks_AGVNet_name": {
+            "defaultValue": "AGVNet",
+            "type": "String"
+        },
+        "applicationGateways_AppGateway_name": {
+            "defaultValue": "AppGateway",
+            "type": "String"
+        },
+        "publicIPAddresses_AGPublicIPAddress_name": {
+            "defaultValue": "AGPublicIPAddress",
+            "type": "String"
+        },
+        "subnets_AGSubnet_name": {
+            "defaultValue": "AGSubnet",
+            "type": "String"
+        },
+        "subnets_AGBackendSubnet_name": {
+            "defaultValue": "AGBackendSubnet",
+            "type": "String"
+        },
+        "virtualNetworkPeerings_panlab_name": {
+            "defaultValue": "panlab",
+            "type": "String"
+        },
+        "applicationGateways_AppGateway_id": {
+            "defaultValue": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/AppG/providers/Microsoft.Network/applicationGateways/AppGateway/frontendIPConfigurations/appGatewayFrontendIP",
+            "type": "String"
+        },
+        "applicationGateways_AppGateway_id_1": {
+            "defaultValue": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/AppG/providers/Microsoft.Network/applicationGateways/AppGateway/frontendPorts/appGatewayFrontendPort",
+            "type": "String"
+        },
+        "applicationGateways_AppGateway_id_2": {
+            "defaultValue": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/AppG/providers/Microsoft.Network/applicationGateways/AppGateway/httpListeners/appGatewayHttpListener",
+            "type": "String"
+        },
+        "applicationGateways_AppGateway_id_3": {
+            "defaultValue": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/AppG/providers/Microsoft.Network/applicationGateways/AppGateway/backendAddressPools/appGatewayBackendPool",
+            "type": "String"
+        },
+        "applicationGateways_AppGateway_id_4": {
+            "defaultValue": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/AppG/providers/Microsoft.Network/applicationGateways/AppGateway/backendHttpSettingsCollection/appGatewayBackendHttpSettings",
+            "type": "String"
+        },
+        "virtualNetworks_AGVNet_id": {
+            "defaultValue": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/panlab/providers/Microsoft.Network/virtualNetworks/fwVNETdzes",
+            "type": "String"
+        },
+        "virtualNetworkPeerings_panlab_id": {
+            "defaultValue": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/panlab/providers/Microsoft.Network/virtualNetworks/fwVNETdzes",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/AppG/providers/Microsoft.Network/applicationGateways/AppGateway'.",
+            "type": "Microsoft.Network/applicationGateways",
+            "name": "[parameters('applicationGateways_AppGateway_name')]",
+            "apiVersion": "2018-02-01",
+            "location": "eastus",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "937c60c4-2605-4969-989b-38e509498bb1",
+                "sku": {
+                    "name": "WAF_Medium",
+                    "tier": "WAF",
+                    "capacity": 2
+                },
+                "gatewayIPConfigurations": [
+                    {
+                        "name": "[concat(parameters('applicationGateways_AppGateway_name'),'appGatewayFrontendIP')]",
+                        "etag": "W/\"0c72c4b9-06e8-4501-89f6-61634e09a4c2\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "subnet": {
+                                "id": "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_AGVNet_name'), parameters('subnets_AGSubnet_name'))]"
+                            }
+                        },
+                        "type": "Microsoft.Network/applicationGateways/gatewayIPConfigurations"
+                    }
+                ],
+                "sslCertificates": [],
+                "authenticationCertificates": [],
+                "frontendIPConfigurations": [
+                    {
+                        "name": "[concat(parameters('applicationGateways_AppGateway_name'),'appGatewayFrontendIP')]",
+                        "etag": "W/\"0c72c4b9-06e8-4501-89f6-61634e09a4c2\"",
+                        "type": "Microsoft.Network/applicationGateways/frontendIPConfigurations",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "privateIPAllocationMethod": "Dynamic",
+                            "publicIPAddress": {
+                                "id": "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_AGPublicIPAddress_name'))]"
+                            }
+                        }
+                    }
+                ],
+                "frontendPorts": [
+                    {
+                        "name": "[concat(parameters('applicationGateways_AppGateway_name'),'appGatewayFrontendPort')]",
+                        "etag": "W/\"0c72c4b9-06e8-4501-89f6-61634e09a4c2\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "port": 80
+                        },
+                        "type": "Microsoft.Network/applicationGateways/frontendPorts"
+                    }
+                ],
+                "backendAddressPools": [
+                    {
+                        "name": "[concat(parameters('applicationGateways_AppGateway_name'),'appGatewayBackendPool')]",
+                        "etag": "W/\"0c72c4b9-06e8-4501-89f6-61634e09a4c2\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "backendAddresses": [
+                                {
+                                    "ipAddress": "10.61.1.4"
+                                }
+                            ]
+                        },
+                        "type": "Microsoft.Network/applicationGateways/backendAddressPools"
+                    }
+                ],
+                "backendHttpSettingsCollection": [
+                    {
+                        "name": "[concat(parameters('applicationGateways_AppGateway_name'),'appGatewayBackendHttpSettings')]",
+                        "etag": "W/\"0c72c4b9-06e8-4501-89f6-61634e09a4c2\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "port": 80,
+                            "protocol": "Http",
+                            "cookieBasedAffinity": "Disabled",
+                            "connectionDraining": {
+                                "enabled": false,
+                                "drainTimeoutInSec": 1
+                            },
+                            "pickHostNameFromBackendAddress": false,
+                            "requestTimeout": 30
+                        },
+                        "type": "Microsoft.Network/applicationGateways/backendHttpSettingsCollection"
+                    }
+                ],
+                "httpListeners": [
+                    {
+                        "name": "[concat(parameters('applicationGateways_AppGateway_name'),'appGatewayHttpListener')]",
+                        "etag": "W/\"0c72c4b9-06e8-4501-89f6-61634e09a4c2\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "frontendIPConfiguration": {
+                                "id": "[parameters('applicationGateways_AppGateway_id')]"
+                            },
+                            "frontendPort": {
+                                "id": "[parameters('applicationGateways_AppGateway_id_1')]"
+                            },
+                            "protocol": "Http",
+                            "requireServerNameIndication": false
+                        },
+                        "type": "Microsoft.Network/applicationGateways/httpListeners"
+                    }
+                ],
+                "urlPathMaps": [],
+                "requestRoutingRules": [
+                    {
+                        "name": "rule1",
+                        "etag": "W/\"0c72c4b9-06e8-4501-89f6-61634e09a4c2\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "ruleType": "Basic",
+                            "httpListener": {
+                                "id": "[parameters('applicationGateways_AppGateway_id_2')]"
+                            },
+                            "backendAddressPool": {
+                                "id": "[parameters('applicationGateways_AppGateway_id_3')]"
+                            },
+                            "backendHttpSettings": {
+                                "id": "[parameters('applicationGateways_AppGateway_id_4')]"
+                            }
+                        },
+                        "type": "Microsoft.Network/applicationGateways/requestRoutingRules"
+                    }
+                ],
+                "probes": [],
+                "redirectConfigurations": [],
+                "webApplicationFirewallConfiguration": {
+                    "enabled": true,
+                    "firewallMode": "Detection",
+                    "ruleSetType": "OWASP",
+                    "ruleSetVersion": "3.0",
+                    "disabledRuleGroups": [],
+                    "requestBodyCheck": false
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworks_AGVNet_name'), parameters('subnets_AGSubnet_name'))]",
+                "[resourceId('Microsoft.Network/publicIPAddresses', parameters('publicIPAddresses_AGPublicIPAddress_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/AppG/providers/Microsoft.Network/publicIPAddresses/AGPublicIPAddress'.",
+            "type": "Microsoft.Network/publicIPAddresses",
+            "sku": {
+                "name": "Basic",
+                "tier": "Regional"
+            },
+            "name": "[parameters('publicIPAddresses_AGPublicIPAddress_name')]",
+            "apiVersion": "2018-02-01",
+            "location": "eastus",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "186a2476-83f0-4e9c-9b8d-33ffb24918dd",
+                "ipAddress": "40.76.18.163",
+                "publicIPAddressVersion": "IPv4",
+                "publicIPAllocationMethod": "Dynamic",
+                "idleTimeoutInMinutes": 4,
+                "dnsSettings": {
+                    "fqdn": "bbfa59e0-4e9e-427a-9600-0d10e3ed966a.cloudapp.net",
+                    "domainNameLabel": "[parameters('publicIPAddresses_AGPublicIPAddress_domainNameLabel')]"
+                },
+                "ipTags": []
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/AppG/providers/Microsoft.Network/virtualNetworks/AGVNet'.",
+            "type": "Microsoft.Network/virtualNetworks",
+            "name": "[parameters('virtualNetworks_AGVNet_name')]",
+            "apiVersion": "2018-02-01",
+            "location": "eastus",
+            "tags": {},
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "resourceGuid": "35535672-c003-4f7c-a4ce-3a27756b0c7e",
+                "addressSpace": {
+                    "addressPrefixes": [
+                        "10.100.0.0/16"
+                    ]
+                },
+                "dhcpOptions": {
+                    "dnsServers": []
+                },
+                "subnets": [
+                    {
+                        "name": "AGBackendSubnet",
+                        "etag": "W/\"b2ed7bf0-9b06-4e23-840d-9a9b1387382b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.100.1.0/24"
+                        }
+                    },
+                    {
+                        "name": "AGSubnet",
+                        "etag": "W/\"b2ed7bf0-9b06-4e23-840d-9a9b1387382b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "addressPrefix": "10.100.2.0/24"
+                        }
+                    }
+                ],
+                "virtualNetworkPeerings": [
+                    {
+                        "name": "panlab",
+                        "etag": "W/\"b2ed7bf0-9b06-4e23-840d-9a9b1387382b\"",
+                        "properties": {
+                            "provisioningState": "Succeeded",
+                            "peeringState": "Connected",
+                            "remoteVirtualNetwork": {
+                                "id": "[parameters('virtualNetworks_AGVNet_id')]"
+                            },
+                            "allowVirtualNetworkAccess": true,
+                            "allowForwardedTraffic": false,
+                            "allowGatewayTransit": false,
+                            "useRemoteGateways": false,
+                            "remoteAddressSpace": {
+                                "addressPrefixes": [
+                                    "10.61.0.0/16"
+                                ]
+                            }
+                        }
+                    }
+                ],
+                "enableDdosProtection": false,
+                "enableVmProtection": false
+            },
+            "dependsOn": []
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/AppG/providers/Microsoft.Network/virtualNetworks/AGVNet/subnets/AGBackendSubnet'.",
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[concat(parameters('virtualNetworks_AGVNet_name'), '/', parameters('subnets_AGBackendSubnet_name'))]",
+            "apiVersion": "2018-02-01",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "10.100.1.0/24"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_AGVNet_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/AppG/providers/Microsoft.Network/virtualNetworks/AGVNet/subnets/AGSubnet'.",
+            "type": "Microsoft.Network/virtualNetworks/subnets",
+            "name": "[concat(parameters('virtualNetworks_AGVNet_name'), '/', parameters('subnets_AGSubnet_name'))]",
+            "apiVersion": "2018-02-01",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "addressPrefix": "10.100.2.0/24"
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_AGVNet_name'))]"
+            ]
+        },
+        {
+            "comments": "Generalized from resource: '/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/AppG/providers/Microsoft.Network/virtualNetworks/AGVNet/virtualNetworkPeerings/panlab'.",
+            "type": "Microsoft.Network/virtualNetworks/virtualNetworkPeerings",
+            "name": "[concat(parameters('virtualNetworks_AGVNet_name'), '/', parameters('virtualNetworkPeerings_panlab_name'))]",
+            "apiVersion": "2018-02-01",
+            "scale": null,
+            "properties": {
+                "provisioningState": "Succeeded",
+                "peeringState": "Connected",
+                "remoteVirtualNetwork": {
+                    "id": "[parameters('virtualNetworkPeerings_panlab_id')]"
+                },
+                "allowVirtualNetworkAccess": true,
+                "allowForwardedTraffic": false,
+                "allowGatewayTransit": false,
+                "useRemoteGateways": false,
+                "remoteAddressSpace": {
+                    "addressPrefixes": [
+                        "10.61.0.0/16"
+                    ]
+                }
+            },
+            "dependsOn": [
+                "[resourceId('Microsoft.Network/virtualNetworks', parameters('virtualNetworks_AGVNet_name'))]"
+            ]
+        }
+    ]
+}

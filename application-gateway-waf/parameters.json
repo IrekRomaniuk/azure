@@ -1,0 +1,48 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "publicIPAddresses_AGPublicIPAddress_domainNameLabel": {
+            "value": null
+        },
+        "virtualNetworks_AGVNet_name": {
+            "value": null
+        },
+        "applicationGateways_AppGateway_name": {
+            "value": null
+        },
+        "publicIPAddresses_AGPublicIPAddress_name": {
+            "value": null
+        },
+        "subnets_AGSubnet_name": {
+            "value": null
+        },
+        "subnets_AGBackendSubnet_name": {
+            "value": null
+        },
+        "virtualNetworkPeerings_panlab_name": {
+            "value": null
+        },
+        "applicationGateways_AppGateway_id": {
+            "value": null
+        },
+        "applicationGateways_AppGateway_id_1": {
+            "value": null
+        },
+        "applicationGateways_AppGateway_id_2": {
+            "value": null
+        },
+        "applicationGateways_AppGateway_id_3": {
+            "value": null
+        },
+        "applicationGateways_AppGateway_id_4": {
+            "value": null
+        },
+        "virtualNetworks_AGVNet_id": {
+            "value": null
+        },
+        "virtualNetworkPeerings_panlab_id": {
+            "value": null
+        }
+    }
+}

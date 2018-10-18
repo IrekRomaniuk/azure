@@ -1,0 +1,58 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "managedClusters_aks_cluster_name": {
+            "defaultValue": "aks-cluster",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "comments": "Generalized from resource: '/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourcegroups/kube-lab/providers/Microsoft.ContainerService/managedClusters/aks-cluster'.",
+            "type": "Microsoft.ContainerService/managedClusters",
+            "name": "[parameters('managedClusters_aks_cluster_name')]",
+            "apiVersion": "2018-03-31",
+            "location": "eastus",
+            "scale": null,
+            "properties": {
+                "kubernetesVersion": "1.9.11",
+                "dnsPrefix": "aks-cluste-kube-lab-c70848",
+                "agentPoolProfiles": [
+                    {
+                        "name": "nodepool1",
+                        "count": 1,
+                        "vmSize": "Standard_DS2_v2",
+                        "osDiskSizeGB": 30,
+                        "storageProfile": "ManagedDisks",
+                        "maxPods": 110,
+                        "osType": "Linux"
+                    }
+                ],
+                "linuxProfile": {
+                    "adminUsername": "azureuser",
+                    "ssh": {
+                        "publicKeys": [
+                            {
+                                "keyData": "ssh-rsa ..."
+                            }
+                        ]
+                    }
+                },
+                "servicePrincipalProfile": {
+                    "clientId": "54...63"
+                },
+                "enableRBAC": true,
+                "networkProfile": {
+                    "networkPlugin": "kubenet",
+                    "podCidr": "10.244.0.0/16",
+                    "serviceCidr": "10.0.0.0/16",
+                    "dnsServiceIP": "10.0.0.10",
+                    "dockerBridgeCidr": "172.17.0.1/16"
+                }
+            },
+            "dependsOn": []
+        }
+    ]
+}

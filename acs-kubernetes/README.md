@@ -11,3 +11,4 @@ Please see https://aka.ms/arm-debug for usage details.","details":[{"code":"BadR
 (The client '' with object id '' does not have authorization to perform action 'Microsoft.Authorization/roleAssignments/read' over scope
  '/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/kube-lab/providers/Microsoft.Authorization'.)\"\r\n }\r\n}"}]}
 ```
+deploy.json and parameters.json downloaded from deployment

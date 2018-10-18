@@ -943,7 +943,7 @@
                     <member>Untrust</member>
                   </from>
                   <source>
-                    <member>any</member>
+                    <member>g-public-trusted</member>
                   </source>
                   <destination>
                     <member>10.61.1.4</member>
@@ -970,7 +970,7 @@
                     <member>Untrust</member>
                   </from>
                   <source>
-                    <member>any</member>
+                    <member>g-public-trusted</member>
                   </source>
                   <destination>
                     <member>10.61.1.4</member>
@@ -998,7 +998,7 @@
                     <member>Untrust</member>
                   </from>
                   <source>
-                    <member>any</member>
+                    <member>g-public-trusted</member>
                   </source>
                   <destination>
                     <member>10.61.1.4</member>

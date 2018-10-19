@@ -381,5 +381,20 @@
         ]
       }
     }
-  ]
+  ],
+  "outputs":
+  {
+      "Firewall":{
+        "type": "string",
+        "value":"[variables('publicIPName')]"
+      },
+      "Default credentials":{
+        "type": "string",
+        "value":"[concat(parameters('adminUsername'),' ',parameters('adminPassword'))]"
+      },
+      "Srv-Jump":{
+        "type": "string",
+        "value":"[variables('jumpBoxPublicIPAddressName')]"
+      }
+  }
 }

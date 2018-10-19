@@ -15,7 +15,7 @@ Please see https://aka.ms/arm-debug for usage details.","details":[{"code":"BadR
 
 ```
 az group create -n kube-lab -l eastus
-az aks create -g kube-lab -n aks-cluster -l eastus --node-count 1 --node-vm-size Standard_DS2_v2 --verbose --generate-ssh-keys --service-principal xxx --client-secret xxx
+az aks create -g kube-lab -n aks-cluster -l eastus --node-count 1 --node-vm-size Standard_D8s_v3 --verbose --generate-ssh-keys --service-principal xxx --client-secret xxx
 ```
 
 ##### acrniuk.azurecr.io

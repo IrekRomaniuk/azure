@@ -180,6 +180,25 @@
                 "commandToExecute": "python script1.py"
            }
       }
+  },
+  {
+    "type": "Microsoft.DevTestLab/schedules",
+           "name": "shutdown-vm",
+           "apiVersion": "2016-05-15",
+           "location": "[resourceGroup().location]",
+           "dependsOn": [
+               "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
+           ],
+           "properties": {
+               "status": "Enabled",
+               "taskType": "ComputeVmShutdownTask",
+               "dailyRecurrence": {
+                   "time": "2200"
+               },
+               "timeZoneId": "East US Standard Time",
+               
+               "targetResourceId": "[resourceId('Microsoft.Compute/virtualMachines',variables('vmName'))]"
+           }
   }
   ],
   "outputs": {

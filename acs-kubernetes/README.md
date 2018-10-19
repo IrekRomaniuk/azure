@@ -11,4 +11,11 @@ Please see https://aka.ms/arm-debug for usage details.","details":[{"code":"BadR
 (The client '' with object id '' does not have authorization to perform action 'Microsoft.Authorization/roleAssignments/read' over scope
  '/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/kube-lab/providers/Microsoft.Authorization'.)\"\r\n }\r\n}"}]}
 ```
-deploy.json and parameters.json downloaded from deployment
+##### deploy.json and parameters.json downloaded from sucesfull deployment. ssh key and clientID to be moved to parameters
+
+```
+az group create -n kube-lab -l eastus
+az aks create -g kube-lab -n aks-cluster -l eastus --node-count 1 --node-vm-size Standard_DS2_v2 --verbose --generate-ssh-keys --service-principal xxx --client-secret xxx
+```
+
+##### acrniuk.azurecr.io

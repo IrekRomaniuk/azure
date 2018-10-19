@@ -17,3 +17,5 @@ The service is fully integrated with Azure Monitor for logging and analytics.
 Azure Firewall is currently a managed public preview that you need to explicitly enable using the Register-AzureRmProviderFeature PowerShell command. Learn more at https://docs.microsoft.com/en-us/azure/firewall.
 
 [Diagram](https://docs.microsoft.com/en-us/azure/firewall/tutorial-firewall-deploy-portal)
+
+![Diagram](tutorial_network)

@@ -6,13 +6,15 @@
       "type": "string",
       "metadata": {
         "description": "virtual network name"
-      }
+      },
+      "defaultValue": "afwVNET"
     },
     "adminUsername": {
       "type": "string",
       "metadata": {
         "description": "Username for the Virtual Machine."
-      }
+      },
+      "defaultValue": "azurefirewall"
     },
     "adminPassword": {
       "type": "securestring",
@@ -231,7 +233,7 @@
       "location": "[parameters('location')]",
       "properties": {
         "hardwareProfile": {
-          "vmSize": "Standard_DS1_v2"
+          "vmSize": "Standard_D8s_v3"
         },
         "storageProfile": {
           "imageReference": {
@@ -279,7 +281,7 @@
       "location": "[parameters('location')]",
       "properties": {
         "hardwareProfile": {
-          "vmSize": "Standard_DS1_v2"
+          "vmSize": "Standard_D8s_v3"
         },
         "storageProfile": {
           "imageReference": {

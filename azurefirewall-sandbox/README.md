@@ -18,4 +18,4 @@ Azure Firewall is currently a managed public preview that you need to explicitly
 
 [Diagram](https://docs.microsoft.com/en-us/azure/firewall/tutorial-firewall-deploy-portal)
 
-![Diagram](tutorial_network)
+![Diagram](tutorial_network.png)

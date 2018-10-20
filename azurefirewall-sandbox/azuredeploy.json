@@ -386,7 +386,7 @@
   {
       "Firewall":{
         "type": "string",
-        "value":"[variables('publicIPName')]"
+        "value":"[reference('ServerNicName').ipConfigurations[0].properties.privateIPAddress]"
       },
       "Default credentials":{
         "type": "string",
@@ -394,7 +394,7 @@
       },
       "Srv-Jump":{
         "type": "string",
-        "value":"[variables('jumpBoxPublicIPAddressName')]"
+        "value":"[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('jumpBoxPublicIPAddressName'))).IpAddress]"
       }
   }
 }

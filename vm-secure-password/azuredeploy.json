@@ -7,20 +7,21 @@
       "metadata": {
         "description": "User name for the Virtual Machine."
       },
-      "defaultValue": "docker"
+      "defaultValue": "azureuser"
     },
     "adminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Password for the Virtual Machine."
-      }
-    },
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/cloud-shell-storage-eastus/providers/Microsoft.KeyVault/vaults/keyniuk"
+        },
+        "secretName": "secretName"
+      },
     "dnsLabelPrefix": {
       "type": "string",
       "metadata": {
         "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
       },
-      "defaultValue": "niuk"
+      "defaultValue": "GEN-UNIQUE"
     },
     "windowsOSVersion": {
       "type": "string",
@@ -180,5 +181,12 @@
         }
       }
     }
-  ]
+  ],
+  "outputs":
+  {     
+      "Default credentials":{
+        "type": "string",
+        "value":"[concat(parameters('adminUsername'),' ',parameters('adminPassword'))]"
+      }
+  }
 }

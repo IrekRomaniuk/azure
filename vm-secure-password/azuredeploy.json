@@ -10,9 +10,11 @@
       "defaultValue": "azureuser"
     },
     "adminPassword": {
-      "type": "securestring",
-      "metadata": {
-        "description": "Password for the Virtual Machine."
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/cloud-shell-storage-eastus/providers/Microsoft.KeyVault/vaults/keyniuk"
+        },
+        "secretName": "azureuser"
       }
     },
     "dnsLabelPrefix": {

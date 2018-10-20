@@ -21,7 +21,7 @@
       "metadata": {
         "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
       },
-      "defaultValue": "GEN-UNIQUE"
+      "defaultValue": "niuk"
     },
     "windowsOSVersion": {
       "type": "string",

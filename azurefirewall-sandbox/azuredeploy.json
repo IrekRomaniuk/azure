@@ -383,16 +383,12 @@
     }
   ],
   "outputs":
-  {
-      "Firewall":{
-        "type": "string",
-        "value":"[reference(resourceId('Microsoft.Network/networkInterfaces', variables('ServerNicName'))).ipConfigurations[0].properties.privateIPAddress]"
-      },
+  {     
       "Default credentials":{
         "type": "string",
         "value":"[concat(parameters('adminUsername'),' ',parameters('adminPassword'))]"
       },
-      "Srv-Jump":{
+      "JumpBox":{
         "type": "string",
         "value":"[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('jumpBoxPublicIPAddressName'))).IpAddress]"
       }

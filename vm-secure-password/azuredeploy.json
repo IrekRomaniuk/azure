@@ -6,7 +6,8 @@
       "type": "string",
       "metadata": {
         "description": "User name for the Virtual Machine."
-      }
+      },
+      "defaultValue": "docker"
     },
     "adminPassword": {
       "type": "securestring",
@@ -18,16 +19,16 @@
       "type": "string",
       "metadata": {
         "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
-      }
+      },
+      "defaultValue": "niuk"
     },
     "windowsOSVersion": {
       "type": "string",
-      "defaultValue": "Standard_D8s_v3",
+      "defaultValue": "2012-R2-Datacenter",
       "allowedValues": [
         "2008-R2-SP1",
         "2012-Datacenter",
         "2012-R2-Datacenter",
-        "Standard_D8s_v3",
         "2016-Datacenter"
       ],
       "metadata": {
@@ -46,16 +47,16 @@
     "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'sawinvm')]",
     "imagePublisher": "MicrosoftWindowsServer",
     "imageOffer": "WindowsServer",
-    "nicName": "myVMNic",
-    "addressPrefix": "10.0.0.0/16",
+    "nicName": "VMNic",
+    "addressPrefix": "10.61.0.0/16",
     "subnetName": "Subnet",
-    "subnetPrefix": "10.0.0.0/24",
+    "subnetPrefix": "10.61.0.0/24",
     "storageAccountType": "Standard_LRS",
-    "publicIPAddressName": "myPublicIP",
+    "publicIPAddressName": "vmPublicIP",
     "publicIPAddressType": "Dynamic",
     "vmName": "SimpleWindowsVM",
-    "vmSize": "Standard_A1",
-    "virtualNetworkName": "MyVNET",
+    "vmSize": "Standard_D8s_v3",
+    "virtualNetworkName": "vmVNET",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]",
     "apiVersion": "2015-06-15"
   },

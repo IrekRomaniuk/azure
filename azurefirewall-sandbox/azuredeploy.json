@@ -386,7 +386,7 @@
   {
       "Firewall":{
         "type": "string",
-        "value":"[reference('ServerNicName').ipConfigurations[0].properties.privateIPAddress]"
+        "value":"[reference(resourceId('Microsoft.Network/networkInterfaces', variables('ServerNicName'))).ipConfigurations[0].properties.privateIPAddress]"
       },
       "Default credentials":{
         "type": "string",

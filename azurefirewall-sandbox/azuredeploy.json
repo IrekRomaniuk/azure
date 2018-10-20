@@ -387,10 +387,6 @@
       "Default credentials":{
         "type": "string",
         "value":"[concat(parameters('adminUsername'),' ',parameters('adminPassword'))]"
-      },
-      "JumpBox":{
-        "type": "string",
-        "value":"[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('jumpBoxPublicIPAddressName')))]"
       }
   }
 }

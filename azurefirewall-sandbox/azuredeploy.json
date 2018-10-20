@@ -390,7 +390,7 @@
       },
       "JumpBox":{
         "type": "string",
-        "value":"[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('jumpBoxPublicIPAddressName'))).IpAddress]"
+        "value":"[reference(resourceId('Microsoft.Network/publicIPAddresses',variables('jumpBoxPublicIPAddressName'))).ipAddress]"
       }
   }
 }

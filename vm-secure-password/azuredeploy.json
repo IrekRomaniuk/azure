@@ -10,11 +10,9 @@
       "defaultValue": "azureuser"
     },
     "adminPassword": {
-      "reference": {
-        "keyVault": {
-          "id": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/cloud-shell-storage-eastus/providers/Microsoft.KeyVault/vaults/keyniuk"
-        },
-        "secretName": "azureuser"
+      "type": "securestring",
+      "metadata": {
+        "description": "Password for the Virtual Machine."
       }
     },
     "dnsLabelPrefix": {
@@ -22,7 +20,7 @@
       "metadata": {
         "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
       },
-      "defaultValue": "GEN-UNIQUE"
+      "defaultValue": "niuk"
     },
     "windowsOSVersion": {
       "type": "string",

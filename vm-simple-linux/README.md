@@ -12,6 +12,28 @@ This template allows you to deploy a simple Linux VM using a few different optio
 
 https://azure.microsoft.com/en-us/blog/automate-linux-vm-customization-tasks-using-customscript-extension/
 
+azuredeploy.last.json:
+
 ```
 {"code":"DeploymentFailed","message":"At least one resource deployment operation failed. Please list deployment operations for details. Please see https://aka.ms/arm-debug for usage details.","details":[{"code":"BadRequest","message":"{\r\n \"error\": {\r\n \"code\": \"InvalidScheduleId\",\r\n \"message\": \"The schedule should be created in subscription xxx, resource group vmlab and with name shutdown-computevm-ubuntu-vm.\"\r\n }\r\n}"}]}
+```
+
+https://docs.microsoft.com/en-us/azure/azure-resource-manager/resource-group-template-deploy-cli
+
+```
+az login -u ... -p ...
+az group create --name vmlab --location "East US"
+az group deployment create \
+  --name vmlabDeployment \
+  --resource-group vmlab \
+  --template-file azuredeploy.json \
+  --parameters @azuredeploy.parameters.json \
+  --parameters adminPassword=
+az vm show \
+    --resource-group vmlab \
+    --name vmlabDeployment \
+    --show-details \
+    --query publicIps \
+    --output tsv  
+az group destroy --name vmlab    
 ```

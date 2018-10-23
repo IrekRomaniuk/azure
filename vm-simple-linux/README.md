@@ -35,5 +35,6 @@ az vm show \
     --show-details \
     --query publicIps \
     --output tsv  
-az group destroy --name vmlab    
+az group deployment show --resource-group vmlab --name vmlabDeployment    
+az group delete --name vmlab    
 ```

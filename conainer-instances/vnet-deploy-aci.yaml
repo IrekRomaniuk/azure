@@ -19,7 +19,7 @@ properties:
     - protocol: tcp
       port: '80'
   networkProfile:
-    id: /subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/container/providers/Microsoft.Network/networkProfiles/aci-network-profile-aci-vnet-subnet
+    id: /subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/vmlab/providers/Microsoft.Network/networkProfiles/aci-network-profile-aci-vnet-subnet
   osType: Linux
   restartPolicy: Always
 tags: null

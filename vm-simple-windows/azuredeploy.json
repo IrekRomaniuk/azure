@@ -5,9 +5,8 @@
     "adminUsername": {
       "type": "string",
       "metadata": {
-        "description": "User name for the Virtual Machine."
-      },
-      "defaultValue": "docker"
+        "description": "Username for the Virtual Machine."
+      }
     },
     "adminPassword": {
       "type": "securestring",
@@ -15,17 +14,25 @@
         "description": "Password for the Virtual Machine."
       }
     },
-    "ubuntuOSVersion": {
+    "dnsLabelPrefix": {
       "type": "string",
-      "defaultValue": "16.04.0-LTS",
+      "metadata": {
+        "description": "Unique DNS Name for the Public IP used to access the Virtual Machine."
+      }
+    },
+    "windowsOSVersion": {
+      "type": "string",
+      "defaultValue": "2016-Datacenter",
       "allowedValues": [
-        "12.04.5-LTS",
-        "14.04.5-LTS",
-        "15.10",
-        "16.04.0-LTS"
+        "2008-R2-SP1",
+        "2012-Datacenter",
+        "2012-R2-Datacenter",
+        "2016-Nano-Server",
+        "2016-Datacenter-with-Containers",
+        "2016-Datacenter"
       ],
       "metadata": {
-        "description": "The Ubuntu version for the VM. This will pick a fully patched image of this given Ubuntu version."
+        "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
       }
     },
     "location": {
@@ -37,36 +44,42 @@
     }
   },
   "variables": {
-    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'salinuxvm')]",
-    "resourceGroup": "cloud-shell-storage-eastus",
-    "imagePublisher": "Canonical",
-    "imageOffer": "UbuntuServer",
-    "nicName": "vmNIC",
-    "addressPrefix": "10.100.0.0/16",
-    "subnetName": "Ubuntu",
-    "subnetPrefix": "10.100.1.0/24",
-    "storageAccountType": "Standard_LRS",
-    "publicIPAddressName": "lin-vmPublicIP",
-    "publicDNSName": "dev-b-ubuntu-vm.eastus.cloudapp.azure.com",
-    "vmName": "ubuntu-vm",
-    "vmSize": "Standard_D8s_v3",
-    "virtualNetworkName": "vmVNET",
+    "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'sawinvm')]",
+    "nicName": "myVMNic",
+    "addressPrefix": "10.1.0.0/16",
+    "subnetName": "Subnet",
+    "subnetPrefix": "10.1.0.0/24",
+    "publicIPAddressName": "myPublicIP",
+    "vmName": "SimpleWinVM",
+    "virtualNetworkName": "MyVNET",
     "subnetRef": "[resourceId('Microsoft.Network/virtualNetworks/subnets', variables('virtualNetworkName'), variables('subnetName'))]"
   },
   "resources": [
     {
       "type": "Microsoft.Storage/storageAccounts",
       "name": "[variables('storageAccountName')]",
-      "apiVersion": "2017-06-01",
+      "apiVersion": "2016-01-01",
       "location": "[parameters('location')]",
       "sku": {
-        "name": "[variables('storageAccountType')]"
+        "name": "Standard_LRS"
       },
       "kind": "Storage",
       "properties": {}
     },
     {
-      "apiVersion": "2017-06-01",
+      "apiVersion": "2016-03-30",
+      "type": "Microsoft.Network/publicIPAddresses",
+      "name": "[variables('publicIPAddressName')]",
+      "location": "[parameters('location')]",
+      "properties": {
+        "publicIPAllocationMethod": "Dynamic",
+        "dnsSettings": {
+          "domainNameLabel": "[parameters('dnsLabelPrefix')]"
+        }
+      }
+    },
+    {
+      "apiVersion": "2016-03-30",
       "type": "Microsoft.Network/virtualNetworks",
       "name": "[variables('virtualNetworkName')]",
       "location": "[parameters('location')]",
@@ -87,11 +100,12 @@
       }
     },
     {
-      "apiVersion": "2017-06-01",
+      "apiVersion": "2016-03-30",
       "type": "Microsoft.Network/networkInterfaces",
       "name": "[variables('nicName')]",
       "location": "[parameters('location')]",
       "dependsOn": [
+        "[resourceId('Microsoft.Network/publicIPAddresses/', variables('publicIPAddressName'))]",
         "[resourceId('Microsoft.Network/virtualNetworks/', variables('virtualNetworkName'))]"
       ],
       "properties": {
@@ -101,7 +115,7 @@
             "properties": {
               "privateIPAllocationMethod": "Dynamic",
               "publicIPAddress": {
-                "id": "[resourceId(variables('resourceGroup'),'Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
+                "id": "[resourceId('Microsoft.Network/publicIPAddresses',variables('publicIPAddressName'))]"
               },
               "subnet": {
                 "id": "[variables('subnetRef')]"
@@ -122,7 +136,7 @@
       ],
       "properties": {
         "hardwareProfile": {
-          "vmSize": "[variables('vmSize')]"
+          "vmSize": "Standard_D8s_v3"
         },
         "osProfile": {
           "computerName": "[variables('vmName')]",
@@ -131,9 +145,9 @@
         },
         "storageProfile": {
           "imageReference": {
-            "publisher": "[variables('imagePublisher')]",
-            "offer": "[variables('imageOffer')]",
-            "sku": "[parameters('ubuntuOSVersion')]",
+            "publisher": "MicrosoftWindowsServer",
+            "offer": "WindowsServer",
+            "sku": "[parameters('windowsOSVersion')]",
             "version": "latest"
           },
           "osDisk": {
@@ -157,39 +171,16 @@
         "diagnosticsProfile": {
           "bootDiagnostics": {
             "enabled": true,
-            "storageUri": "[concat(reference(concat('Microsoft.Storage/storageAccounts/', variables('storageAccountName')), '2016-01-01').primaryEndpoints.blob)]"
+            "storageUri": "[reference(resourceId('Microsoft.Storage/storageAccounts/', variables('storageAccountName'))).primaryEndpoints.blob]"
           }
         }
       }
-    },
-    {
-      "name": "[concat(variables('vmName'),'/vm-customscript')]",
-      "type": "Microsoft.Compute/virtualMachines/extensions",
-      "apiVersion": "2018-10-01",
-      "location": "[parameters('location')]",
-      "dependsOn": [
-          "[concat('Microsoft.Compute/virtualMachines/', variables('vmName'))]"
-      ],
-      "properties":
-       {
-            "publisher": "Microsoft.Azure.Extensions",
-            "type": "CustomScript",
-            "typeHandlerVersion": "2.0",
-            "settings": {
-                "fileUris": ["https://raw.githubusercontent.com/IrekRomaniuk/azure/master/vm-simple-linux/script1.py"],
-                "commandToExecute": "python script1.py"
-           }
-      }
-  }
+    }
   ],
   "outputs": {
-        "Default credentials":{
-          "type": "string",
-          "value":"[concat(parameters('adminUserName'),' ',parameters('adminPassword'))]"
-        },
-    "sshCommand": {
+    "hostname": {
       "type": "string",
-      "value": "[concat('ssh ', parameters('adminUsername'), '@', variables('publicDNSName'))]"
+      "value": "[reference(variables('publicIPAddressName')).dnsSettings.fqdn]"
     }
   }
 }

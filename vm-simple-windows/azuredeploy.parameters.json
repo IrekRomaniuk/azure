@@ -1,0 +1,21 @@
+{
+  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+  "contentVersion": "1.0.0.0",
+  "parameters": {
+    "adminUsername": {
+      "value": "azureuser"
+    },
+    "adminPassword": {
+      "reference": {
+        "keyVault": {
+          "id": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/cloud-shell-storage-eastus/providers/Microsoft.KeyVault/vaults/keyniuk"
+          
+        },
+        "secretName": "azureuser"
+      }
+    },
+    "dnsLabelPrefix": {
+      "value": "niuk"
+    }
+  }
+}

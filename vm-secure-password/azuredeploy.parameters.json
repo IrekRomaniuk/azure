@@ -8,9 +8,9 @@
     "adminPassword": {
       "reference": {
         "keyVault": {
-          "id": "/subscriptions/XXXXXXX/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/vaultName"
+          "id": "/subscriptions/XXXXXXX/resourceGroups/resourceGroupName/providers/Microsoft.KeyVault/vaults/keyniuk"
         },
-        "secretName": "secretName"
+        "secretName": "azureuser"
       }
     },
     "dnsLabelPrefix": {

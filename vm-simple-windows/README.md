@@ -12,7 +12,7 @@ This template allows you to deploy a simple Windows VM using a few different opt
 ```
 az keyvault secret show --name 'azureuser' --vault-name 'keyniuk'
 
-rg=lab
+rg=winlab
 
 dir=$(pwd)
 template=$dir/azuredeploy.json

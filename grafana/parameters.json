@@ -1,0 +1,63 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "sshUsername": {
+            "value": "azureuser"
+        },
+        "authenticationType": {
+            "value": "password"
+        },
+        "sshPassword": {
+            "value": null
+        },
+        "grafanaAdminPassword": {
+            "value": null
+        },
+        "location": {
+            "value": "eastus"
+        },
+        "vmSize": {
+            "value": "Standard_A2"
+        },
+        "storageAccountName": {
+            "value": "niukgrafanastorage"
+        },
+        "storageAccountType": {
+            "value": "Standard_LRS"
+        },
+        "storageAccountNewOrExisting": {
+            "value": "new"
+        },
+        "storageAccountExistingRGName": {
+            "value": "grafana"
+        },
+        "domainNamePrefix": {
+            "value": "grafananiuk"
+        },
+        "publicIPAddressName": {
+            "value": "grafanaIP"
+        },
+        "publicIPAddressExistingRGName": {
+            "value": "grafana"
+        },
+        "virtualNetworkName": {
+            "value": "grafanaVnet"
+        },
+        "virtualNetworkNewOrExisting": {
+            "value": "new"
+        },
+        "virtualNetworkExistingRGName": {
+            "value": "grafana"
+        },
+        "virtualNetworkAddressPrefix": {
+            "value": "10.10.0.0/16"
+        },
+        "subnetName": {
+            "value": "grafanaSubnet"
+        },
+        "subnetPrefix": {
+            "value": "10.10.0.0/24"
+        }
+    }
+}

@@ -1,0 +1,1 @@
+Broken, Just follow https://live.paloaltonetworks.com/t5/MineMeld-Articles/Manually-install-MineMeld-on-Ubuntu-Server-14-04/ta-p/98454

@@ -240,11 +240,10 @@
       "defaultValue": "Passw0rd"
     },
     "sshPublicKey": {
-      "reference": {
-        "keyVault": {
-          "id": "/subscriptions/c7084809-7044-42f7-8d2e-2fb121098957/resourceGroups/cloud-shell-storage-eastus/providers/Microsoft.KeyVault/vaults/keyniuk"
-        },
-        "secretName": "sshkey"
+      "type": "string",
+      "defaultValue": "",
+      "metadata": {
+        "description": "SSH RSA public key file as a string. Must be specified if Authentication Type is 'sshPublicKey'."
       }
     }
   },

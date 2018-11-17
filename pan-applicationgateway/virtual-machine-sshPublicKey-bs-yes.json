@@ -43,7 +43,7 @@
     },
     "sshKey": {
       "type": "string"
-    },
+    }
   },
   "variables": {
         "apiVersion": "2015-06-15",

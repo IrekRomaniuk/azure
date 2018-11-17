@@ -93,7 +93,7 @@
   },
   "variables": {
     "location": "[resourceGroup().location]",
-    "rgname": "[resourceGroup().id]",
+    "rgname": "[resourceGroup().id]"
   },
   "resources": [
   ],

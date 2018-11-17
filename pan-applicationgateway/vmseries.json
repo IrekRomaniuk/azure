@@ -134,7 +134,7 @@
       "metadata": {
         "artifactsBaseUrl": "",
         "description": "URL to acquire other VM-Series for Azure templates"
-      },
+      }
     },
     "MgmtPublicIPAddressName": {
       "type": "string",

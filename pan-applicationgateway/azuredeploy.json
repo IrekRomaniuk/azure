@@ -236,7 +236,8 @@
       "defaultValue": "",
       "metadata": {
         "description": "Password for the administrator account of all VM instances. Must be specified if Authentication Type is 'password'."
-      }
+      },
+      "defaultValue": "Passw0rd!"
     },
     "sshPublicKey": {
       "type": "string",

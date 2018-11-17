@@ -14,7 +14,7 @@
        "metadata": {
            "description": "Your source public IP address. Added to the inbound NSG on eth0 (MGMT), to restrict access to the deployment."
        },
-       "defaultValue": "0.0.0.0/0"
+       "defaultValue": "162.248.249.0/24,72.195.150.25,209.160.129.0/24"
     },
     "virtualNetworkName": {
       "type": "string",

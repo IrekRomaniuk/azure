@@ -17,3 +17,9 @@ As demand for your web services increase, you can add more web servers and deplo
 [Deploy the Template to Azure](https://www.paloaltonetworks.com/documentation/80/virtualization/virtualization/set-up-the-vm-series-firewall-on-azure/deploy-the-vm-series-and-azure-application-gateway-template/start-using-the-vm-series--azure-application-gateway-template/deploy-the-template-to-azure#id2d3b5321-8303-4995-be66-c26522cf2074)
 Note the Public IP address or the DNS name assigned to eth0-VM-Series0 and eth0-VM-Series1 to access the management interface of the VM-Series firewalls.
 You can either configure the firewall manually or import the Sample Configuration File appgw-sample.xml provided in the GitHub repository and customize it for your security needs.
+
+
+https://panfwmgmt0.eastus.cloudapp.azure.com
+https://panfwmgmt1.eastus.cloudapp.azure.com
+
+http://panappgw.eastus.cloudapp.azure.com (http://40.76.25.4/)

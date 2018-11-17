@@ -95,7 +95,7 @@
       "metadata": {
         "description": "App Gateway Public IP DNS Name. Must be globally unique."
       },
-      "defaultValue": "panlabAppGw"
+      "defaultValue": "panappgw"
     },
     "appGatewaySubnetName": {
       "type": "string",
@@ -180,7 +180,7 @@
       "metadata": {
         "description": "DNS Name prefix of public IP resource for Management interface of VM-Series firewall.  Name must be globally unique."
       },  
-      "defaultValue": "panlabFWMgmt"
+      "defaultValue": "panfwmgmt"
     },
     "storageAccountName": {
       "type": "string",

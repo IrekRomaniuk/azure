@@ -1,14 +1,22 @@
 <?xml version="1.0"?>
-<config urldb="paloaltonetworks" version="8.1.0">
+<config version="7.1.0" urldb="paloaltonetworks">
   <mgt-config>
     <users>
-      <entry name="paloalto">
+      <entry name="admin">
+        <phash>*</phash>
         <permissions>
           <role-based>
             <superuser>yes</superuser>
           </role-based>
         </permissions>
-        <phash>$1$vwrmpfpg$5gKlNUOq04GPq4yaIPC7Q1</phash>
+      </entry>
+      <entry name="pandemo">
+        <permissions>
+          <role-based>
+            <superuser>yes</superuser>
+          </role-based>
+        </permissions>
+        <phash>$1$ljjdxeva$.isIbumicIMfaHvG/EKqd.</phash>
       </entry>
     </users>
   </mgt-config>
@@ -324,7 +332,7 @@
               </recurring>
             </threats>
           </update-schedule>
-          <timezone>US/Eastern</timezone>
+          <timezone>US/Pacific</timezone>
           <service>
             <disable-telnet>yes</disable-telnet>
             <disable-http>yes</disable-http>
@@ -337,7 +345,6 @@
               <accept-dhcp-domain>no</accept-dhcp-domain>
             </dhcp-client>
           </type>
-          <server-verification>yes</server-verification>
         </system>
         <setting>
           <config>
@@ -400,8 +407,6 @@
                     <member>any</member>
                   </hip-profiles>
                   <action>allow</action>
-                  <log-start>yes</log-start>
-                  <disabled>yes</disabled>
                 </entry>
                 <entry name="deny_all">
                   <to>
@@ -481,25 +486,7 @@
             <entry name="internal-load-balancer-IP">
               <ip-netmask>192.168.2.6</ip-netmask>
             </entry>
-            <entry name="162.248.249.0-24">
-              <ip-netmask>162.248.249.0/24</ip-netmask>
-            </entry>
-            <entry name="209.160.129.0-24">
-              <ip-netmask>209.160.129.0/24</ip-netmask>
-            </entry>
-            <entry name="home">
-              <ip-netmask>72.195.150.25</ip-netmask>
-            </entry>
           </address>
-          <address-group>
-            <entry name="g-trusted-sources">
-              <static>
-                <member>162.248.249.0-24</member>
-                <member>209.160.129.0-24</member>
-                <member>home</member>
-              </static>
-            </entry>
-          </address-group>
         </entry>
       </vsys>
     </entry>

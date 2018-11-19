@@ -98,7 +98,7 @@ az vm create \
 az network lb create \
     --resource-group $rg \
     --name fwPrivateLBout \
-    --frontend-ip-name myFrontEnd \
+    --frontend-ip-name fwPrivateLBoutIP \
     --private-ip-address 192.168.5.6 \
     --backend-pool-name BackendPool2 \
     --vnet-name vnet-FW \

@@ -35,7 +35,7 @@ $ ssh paloalto@192.168.5.4
 ```
 
 ```
-az login -u ... -p ...
+az login
 az group create --name panlab-apg --location "East US"
 az group deployment create \
   --name panlabDeployment \

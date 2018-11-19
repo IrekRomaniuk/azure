@@ -22,6 +22,9 @@
     },
     "storageAccountNewOrExisting": {
       "value": "new"
+    },
+    "sshPublicKey":{
+      "value": "new"
     }
   }
 }

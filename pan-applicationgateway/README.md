@@ -41,8 +41,8 @@ az group deployment create \
   --name panlabDeployment \
   --resource-group panlab-apg \
   --template-file azuredeploy.json \
-  --parameters @azuredeploy.parameters.json \
-  --parameters password=
+  --parameters @azureDeploy.parameters.json \
+  --parameters sshPublicKey=
 az vm show \
     --resource-group panlab-apg \
     --name panlabDeployment \

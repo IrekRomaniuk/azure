@@ -14,7 +14,7 @@
        "metadata": {
            "description": "Your source public IP address. Added to the inbound NSG on eth0 (MGMT), to restrict access to the deployment."
        },
-       "defaultValue": "162.248.249.0/24,72.195.150.25,209.160.129.0/24"
+       "defaultValue": "0.0.0.0/0"
     },
     "virtualNetworkName": {
       "type": "string",
@@ -167,7 +167,7 @@
     },
     "jumpSubnetName": {
       "type": "string",
-      "defaultValue": "transitSubnet",
+      "defaultValue": "jumpSubnet",
       "metadata": {
         "description": "Subnet for jump Network"
       }
@@ -585,11 +585,17 @@
           "sshKey": {
                "value": "[parameters('sshPublicKey')]"
           },
-          "subnetName": {
+          "subnetInName": {
                "value": "[parameters('backendSubnetName')]"
           },
-          "frontendSubnetName": {
+          "frontendSubnetInName": {
                "value": "[parameters('trustedSubnetName')]"
+          },
+          "subnetOutName": {
+            "value": "[parameters('backendSubnetName')]"
+          },
+          "frontendSubnetOutName": {
+            "value": "[parameters('trustedSubnetName')]"
           },
           "vmSize": {
                "value": "[parameters('backendVmSize')]"

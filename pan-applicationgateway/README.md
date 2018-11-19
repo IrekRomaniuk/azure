@@ -35,6 +35,8 @@ $ ssh paloalto@192.168.5.4
 ```
 
 ```
+rg='panlab-apg'
+dp='panlabDeployment'
 az login
 az group create --name panlab-apg --location "East US"
 az group deployment create \
@@ -52,4 +54,27 @@ az vm show \
 az group deployment show --resource-group panlab-apg --name panlabDeployment    
 az group delete --name panlab-apg    
 ```
+
+NSG: 162.248.249.0/24,72.195.150.25,209.160.129.0/24
+
+
+az vm create \
+    --resource-group $rg \
+    --name netadmin1a \
+    --os-type linux --image UbuntuLTS \
+    --admin-username paloalto \
+    --vnet vnet-FW
+    --subnet jumpSubnet
+    --authentication-type password
+    --admin-password --no-wait
+
+az vm create \
+    --resource-group $rg \
+    --name jump \
+    --os-type linux --image UbuntuLTS \
+    --admin-username paloalto \
+    --vnet vnet-FW
+    --subnet transitSubnet
+    --public-ip-address-dns-name jumpserver
+    --ssh-key-value 
 

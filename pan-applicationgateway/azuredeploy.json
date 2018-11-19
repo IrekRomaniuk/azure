@@ -111,11 +111,18 @@
         "description": "CIDR for App Gateway"
       }
     },
-    "internalLoadBalancerName": {
+    "internalInboundLoadBalancerName": {
       "type": "string",
-      "defaultValue": "fwPrivateLB",
+      "defaultValue": "fwPrivateLBInbound",
       "metadata": {
-        "description": "Internal Load Balancer name - used to identify resource in Azure portal"
+        "description": "Internal Load Balancer name - inbound"
+      }
+    },
+    "internalOutboundLoadBalancerName": {
+      "type": "string",
+      "defaultValue": "fwPrivateLBOutbound",
+      "metadata": {
+        "description": "Internal Load Balancer name - inbound"
       }
     },
     "backendSubnetName": {
@@ -141,6 +148,32 @@
        ],
        "metadata": {
           "description": "Azure VM size for backend VMs.  Not all sizes are available in all regions."
+       },
+       "defaultValue": "Standard_D8s_v3"
+    },
+    "transitSubnetName": {
+      "type": "string",
+      "defaultValue": "transitSubnet",
+      "metadata": {
+        "description": "Subnet for Backend WWW Network"
+      }
+    },
+    "transitSubnetPrefix": {
+      "type": "string",
+      "defaultValue": "192.168.5.0/24",
+      "metadata": {
+        "description": "CIDR for Backend WWW Network"
+      }
+    },
+    "netadminVmSize": {
+       "type": "string",
+       "allowedValues": [
+          "Standard_A1",
+          "Standard_D1",
+          "Standard_D8s_v3"
+       ],
+       "metadata": {
+          "description": "Azure VM size for netadmin VMs.  Not all sizes are available in all regions."
        },
        "defaultValue": "Standard_D8s_v3"
     },
@@ -233,7 +266,6 @@
     },
     "password": {
       "type": "securestring",
-      "defaultValue": "",
       "metadata": {
         "description": "Password for the administrator account of all VM instances. Must be specified if Authentication Type is 'password'."
       },
@@ -512,9 +544,12 @@
           "virtualNetworkExistingRGName": {
                "value": "[variables('rgname')]"
           },
-          "lbName": {
-               "value": "[parameters('internalLoadBalancerName')]"
+          "lbInName": {
+               "value": "[parameters('internalInboundLoadBalancerName')]"
           },
+          "lbOutName": {
+            "value": "[parameters('internalOutboundLoadBalancerName')]"
+       },
           "adminUsername": {
                "value": "[parameters('username')]"
           },

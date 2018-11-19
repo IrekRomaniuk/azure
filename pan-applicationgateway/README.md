@@ -19,7 +19,24 @@ Note the Public IP address or the DNS name assigned to eth0-VM-Series0 and eth0-
 You can either configure the firewall manually or import the Sample Configuration File appgw-sample.xml provided in the GitHub repository and customize it for your security needs.
 
 
-https://panfwmgmt0.eastus.cloudapp.azure.com
+https://panfwmgmt0.eastus.cloudapp.azure.com 
+$ ssh -i .ssh/id_rsa panfwmgmt0.eastus.cloudapp.azure.com
 https://panfwmgmt1.eastus.cloudapp.azure.com
+$ ssh -i .ssh/id_rsa panfwmgmt1.eastus.cloudapp.azure.com
 
-http://panappgw.eastus.cloudapp.azure.com (http://40.76.25.4/)
+
+http://panappgw.eastus.cloudapp.azure.com (http://40.76.25.4/ -> $ ssh paloalto@40.76.25.4)
+
+jumpserver
+$ ssh -i .ssh/id_rsa  paloalto@40.76.31.120 
+netadmin1a
+$ ssh paloalto@192.168.5.4
+
+
+
+IP address
+40.76.31.120 jumpserver
+40.87.123.6 mgmt0
+40.87.122.14 mgmt1
+40.76.25.4 appgw
+

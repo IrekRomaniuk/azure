@@ -38,43 +38,69 @@ $ ssh paloalto@192.168.5.4
 rg='panlab-apg'
 dp='panlabDeployment'
 az login
-az group create --name panlab-apg --location "East US"
+az group create --name $rg --location "East US"
 az group deployment create \
-  --name panlabDeployment \
-  --resource-group panlab-apg \
+  --name $dp \
+  --resource-group $rg \
   --template-file azuredeploy.json \
   --parameters @azureDeploy.parameters.json \
-  --parameters sshPublicKey=
+  --parameters sshPublicKey='
 az vm show \
-    --resource-group panlab-apg \
+    --resource-group $rg \
     --name panlabDeployment \
     --show-details \
     --query publicIps \
     --output tsv  
-az group deployment show --resource-group panlab-apg --name panlabDeployment    
-az group delete --name panlab-apg    
+az group deployment show --resource-group $rg --name $dp   
+az group delete --name $rg    
 ```
 
 NSG: 162.248.249.0/24,72.195.150.25,209.160.129.0/24
 
 
+
+Standard_D8s_v3 ?!
+
 az vm create \
     --resource-group $rg \
     --name netadmin1a \
     --os-type linux --image UbuntuLTS \
+    --size Standard_B1s \
     --admin-username paloalto \
-    --vnet vnet-FW
-    --subnet jumpSubnet
-    --authentication-type password
-    --admin-password --no-wait
+    --vnet vnet-FW --subnet transitSubnet \
+    --private-ip-address 192.168.5.4
+    --authentication-type password \
+    --admin-password '
+
+az network nic create \
+    --resource-group $rg \
+    --name jumpNicTransit \
+    --vnet-name vnet-FW \
+    --subnet transitSubnet \
+
+az network nic create \
+    --resource-group $rg \
+    --name jumpNic \
+    --vnet-name vnet-FW \
+    --subnet jumpSubnet \   
 
 az vm create \
     --resource-group $rg \
-    --name jump \
+    --name jumpserver \
+    --size Standard_B1s \
     --os-type linux --image UbuntuLTS \
     --admin-username paloalto \
-    --vnet vnet-FW
-    --subnet transitSubnet
-    --public-ip-address-dns-name jumpserver
-    --ssh-key-value 
+    --vnet vnet-FW --subnet jumpSubnet \
+    --nics jumpNicTransit, jumpNic
+    --public-ip-address-dns-name jumpserver \
+    --ssh-key-value '
+
+az network lb create \
+    --resource-group $rg \
+    --name fwPrivateLBout \
+    --frontend-ip-name myFrontEnd \
+    --private-ip-address 192.168.5.6 \
+    --backend-pool-name BackendPool2 \
+    --vnet-name vnet-FW \
+    --subnet transitSubnet    
 

@@ -591,12 +591,6 @@
           "frontendSubnetInName": {
                "value": "[parameters('trustedSubnetName')]"
           },
-          "subnetOutName": {
-            "value": "[parameters('backendSubnetName')]"
-          },
-          "frontendSubnetOutName": {
-            "value": "[parameters('trustedSubnetName')]"
-          },
           "vmSize": {
                "value": "[parameters('backendVmSize')]"
           },

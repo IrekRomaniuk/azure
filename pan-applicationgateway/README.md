@@ -40,3 +40,22 @@ IP address
 40.87.122.14 mgmt1
 40.76.25.4 appgw
 
+```
+az login -u ... -p ...
+az group create --name panlab-apg --location "East US"
+az group deployment create \
+  --name panlabDeployment \
+  --resource-group panlab-apg \
+  --template-file azuredeploy.json \
+  --parameters @azuredeploy.parameters.json \
+  --parameters password=
+az vm show \
+    --resource-group panlab-apg \
+    --name panlabDeployment \
+    --show-details \
+    --query publicIps \
+    --output tsv  
+az group deployment show --resource-group panlab-apg --name panlabDeployment    
+az group delete --name panlab-apg    
+```
+

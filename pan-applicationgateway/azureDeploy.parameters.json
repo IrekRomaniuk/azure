@@ -3,25 +3,25 @@
   "contentVersion": "1.0.0.0",
   "parameters": {
     "networkSecurityGroupInboundSrcIP": {
-      "value": "0.0.0.0/0"
+      "value": "162.248.249.0/24,72.195.150.25,209.160.129.0/24"
     },
     "virtualNetworkAddressPrefix": {
       "value": "192.168.0.0/16"
     },
     "virtualNetworkNewOrExisting": {
-      "value": "existing"
+      "value": "new"
     },
     "username": {
-      "value": "DEFAULT-USER"
+      "value": "paloalto"
     },
     "password": {
-      "value": "DEFAULT-PASSWORD"
+      "value": "Passw0rd"
     },
     "storageAccountName": {
-      "value": "DEFAULT-STORAGE"
+      "value": "panlabstorage"
     },
     "storageAccountNewOrExisting": {
-      "value": "existing"
+      "value": "new"
     }
   }
 }

@@ -155,14 +155,28 @@
       "type": "string",
       "defaultValue": "transitSubnet",
       "metadata": {
-        "description": "Subnet for Backend WWW Network"
+        "description": "Subnet for transit Network"
       }
     },
     "transitSubnetPrefix": {
       "type": "string",
       "defaultValue": "192.168.5.0/24",
       "metadata": {
-        "description": "CIDR for Backend WWW Network"
+        "description": "CIDR for transit Network"
+      }
+    },
+    "jumpSubnetName": {
+      "type": "string",
+      "defaultValue": "transitSubnet",
+      "metadata": {
+        "description": "Subnet for jump Network"
+      }
+    },
+    "jumpSubnetPrefix": {
+      "type": "string",
+      "defaultValue": "192.168.6.0/24",
+      "metadata": {
+        "description": "CIDR for jump Network"
       }
     },
     "netadminVmSize": {
@@ -351,6 +365,12 @@
           "subnet2Name": {
                "value": "[parameters('trustedSubnetName')]"
           },
+          "subnet3Name": {
+               "value": "[parameters('transitSubnetName')]"
+          },
+          "subnet4Name": {
+            "value": "[parameters('jumpSubnetName')]"
+       },
           "subnetLBName": {
                "value": "[parameters('appGatewaySubnetName')]"
           },
@@ -365,6 +385,12 @@
           },
           "subnet2Prefix": {
                "value": "[parameters('trustedSubnetPrefix')]"
+          },
+          "subnet3Prefix": {
+            "value": "[parameters('transitSubnetPrefix')]"
+          },
+          "subnet4Prefix": {
+            "value": "[parameters('jumpSubnetPrefix')]"
           },
           "subnetLBPrefix": {
                "value": "[parameters('appGatewaySubnetPrefix')]"

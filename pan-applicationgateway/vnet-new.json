@@ -41,6 +41,20 @@
         "description": "Subnet for Trust"
       }
     },
+    "subnet3Name": {
+      "type": "string",
+      "defaultValue": "Transit",
+      "metadata": {
+        "description": "Subnet for transit"
+      }
+    },
+    "subnet4Name": {
+      "type": "string",
+      "defaultValue": "Jump",
+      "metadata": {
+        "description": "Subnet for jump"
+      }
+    },
     "subnetLBName": {
       "type": "string",
       "defaultValue": "UntrustLB",
@@ -76,6 +90,20 @@
         "description": "Trust subnet CIDR"
       }
     },
+    "subnet3Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.5.0/24",
+      "metadata": {
+        "description": "Transit subnet CIDR"
+      }
+    },
+    "subnet4Prefix": {
+      "type": "string",
+      "defaultValue": "192.168.6.0/24",
+      "metadata": {
+        "description": "Jump subnet CIDR"
+      }
+    },
     "subnetLBPrefix": {
       "type": "string",
       "defaultValue": "192.168.3.0/24",
@@ -99,6 +127,8 @@
     "subnet0Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet0Name'))]",
     "subnet1Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet1Name'))]",
     "subnet2Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet2Name'))]",
+    "subnet2Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet3Name'))]",
+    "subnet2Ref": "[concat(variables('vnetID'),'/subnets/',parameters('subnet4Name'))]",
     "subnetLBRef": "[concat(variables('vnetID'),'/subnets/',parameters('subnetLBName'))]",
     "subnetWWWRef": "[concat(variables('vnetID'),'/subnets/',parameters('subnetWWWName'))]",
     "subnets": [
@@ -124,6 +154,18 @@
         }
       },
       {
+        "name": "[parameters('subnet3Name')]",
+        "properties": {
+          "addressPrefix": "[parameters('subnet3Prefix')]"
+        }
+      },
+      {
+        "name": "[parameters('subnet4Name')]",
+        "properties": {
+          "addressPrefix": "[parameters('subnet4Prefix')]"
+        }
+      },
+      {
         "name": "[parameters('subnetLBName')]",
         "properties": {
           "addressPrefix": "[parameters('subnetLBPrefix')]"
@@ -134,7 +176,7 @@
         "properties": {
           "addressPrefix": "[parameters('subnetWWWPrefix')]"
         }
-      },
+      }
     ]
   },
   "resources": [

@@ -18,6 +18,7 @@ As demand for your web services increase, you can add more web servers and deplo
 Note the Public IP address or the DNS name assigned to eth0-VM-Series0 and eth0-VM-Series1 to access the management interface of the VM-Series firewalls.
 You can either configure the firewall manually or import the Sample Configuration File appgw-sample.xml provided in the GitHub repository and customize it for your security needs.
 
+##### Notes:
 
 https://panfwmgmt0.eastus.cloudapp.azure.com 
 $ ssh -i .ssh/id_rsa panfwmgmt0.eastus.cloudapp.azure.com
@@ -54,21 +55,19 @@ az vm show \
 az group deployment show --resource-group $rg --name $dp   
 az group delete --name $rg    
 ```
-
+##### More Notes:
 NSG: 162.248.249.0/24,72.195.150.25,209.160.129.0/24
+Size: Standard_D8s_v3 ?!
 
-
-
-Standard_D8s_v3 ?!
-
+```
 az vm create \
     --resource-group $rg \
     --name netadmin1a \
     --os-type linux --image UbuntuLTS \
     --size Standard_B1s \
     --admin-username paloalto \
-    --vnet vnet-FW --subnet transitSubnet \
-    --private-ip-address 192.168.5.4
+    --vnet-name vnet-FW --subnet transitSubnet \
+    --private-ip-address 192.168.5.4 \
     --authentication-type password \
     --admin-password '
 
@@ -103,4 +102,4 @@ az network lb create \
     --backend-pool-name BackendPool2 \
     --vnet-name vnet-FW \
     --subnet transitSubnet    
-
+```

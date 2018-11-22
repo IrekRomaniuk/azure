@@ -19,3 +19,6 @@ az aks create -g kube-lab -n aks-cluster -l eastus --node-count 1 --node-vm-size
 ```
 
 ##### acrniuk.azurecr.io
+
+Reference:
+[by Vincent-Philippe Lauzon](https://github.com/vplauzon/aks)

@@ -60,40 +60,67 @@ NSG: 162.248.249.0/24,72.195.150.25,209.160.129.0/24
 Size: Standard_D8s_v3 ?!
 
 ```
+ResourceGroupName="CreateVmDemo2"
+VmName="ExampleVm"
+AdminPassword="Passw0rd"
+VnetName="vnet-FW"
+SubnetName="demoSubnet"
+Prefix="192.168.5.0/24"
+SshKey=''
+
+az group create --name $ResourceGroupName --location eastus
 az vm create \
-    --resource-group $rg \
-    --name netadmin1a \
-    --os-type linux --image UbuntuLTS \
-    --size Standard_B1s \
-    --admin-username paloalto \
-    --vnet-name vnet-FW --subnet transitSubnet \
-    --private-ip-address 192.168.5.4 \
+    --resource-group $ResourceGroupName \
+    --name $VmName \
+    --image UbuntuLTS \
+    --admin-username azureuser \
     --authentication-type password \
-    --admin-password '
+    --admin-password $AdminPassword \
+    --size Standard_B1s \
+    --use-unmanaged-disk \
+    --storage-sku Standard_LRS \
+    --public-ip-address ""
+    --vnet-name $VnetName --subnet $SubnetName \
+    --subnet-address-prefix $Prefix --private-ip-address 192.168.5.4 
+    
+az vm open-port --port 22 --resource-group $ResourceGroupName --name $VmName
 
 az network nic create \
     --resource-group $rg \
-    --name jumpNicTransit \
+    --name jumpNicPrivate \
     --vnet-name vnet-FW \
     --subnet transitSubnet \
 
 az network nic create \
     --resource-group $rg \
-    --name jumpNic \
+    --name jumpNicPublic \
     --vnet-name vnet-FW \
     --subnet jumpSubnet \   
+
+------------------2 nics: public and private
+az network nic create \
+    --resource-group $ResourceGroupName \
+    --name jumpNicPrivate \
+    --vnet-name $VnetName \
+    --subnet $SubnetName \
+
+az network nic create \
+    --resource-group $ResourceGroupName \
+    --name jumpNicPublic \
+    --vnet-name $VnetName \
+    --subnet $SubnetName \   
 
 az vm create \
     --resource-group $rg \
     --name jumpserver \
     --size Standard_B1s \
-    --os-type linux --image UbuntuLTS \
+    --image UbuntuLTS \
     --admin-username paloalto \
-    --vnet vnet-FW --subnet jumpSubnet \
-    --nics jumpNicTransit, jumpNic
-    --public-ip-address-dns-name jumpserver \
-    --ssh-key-value '
-
+    --nics jumpNicPrivate, jumpNicPublic
+    --public-ip-address-dns-name $VmName \
+    --ssh-key-value $sSshKey
+    --vnet $VnetName --subnet $SubnetName 
+    
 az network lb create \
     --resource-group $rg \
     --name fwPrivateLBout \

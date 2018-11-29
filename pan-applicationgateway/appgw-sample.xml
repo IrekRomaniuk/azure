@@ -90,6 +90,7 @@
                   <enable>no</enable>
                 </lldp>
                 <dhcp-client/>
+                <interface-management-profile>lb</interface-management-profile>
               </layer3>
             </entry>
             <entry name="ethernet1/2">
@@ -110,6 +111,7 @@
                 <lldp>
                   <enable>no</enable>
                 </lldp>
+                <interface-management-profile>lb</interface-management-profile>
               </layer3>
             </entry>
           </ethernet>
@@ -122,6 +124,14 @@
               <action>wait-recover</action>
             </entry>
           </monitor-profile>
+          <interface-management-profile>
+            <entry name="lb">
+              <http>no</http>
+              <https>yes</https>
+              <ping>no</ping>
+              <response-pages>no</response-pages>
+            </entry>
+          </interface-management-profile>
         </profiles>
         <ike>
           <crypto-profiles>
@@ -260,53 +270,149 @@
           </profile>
         </qos>
         <virtual-router>
-          <entry name="default">
-            <protocol>
-              <bgp>
-                <enable>no</enable>
-                <dampening-profile>
-                  <entry name="default">
-                    <cutoff>1.25</cutoff>
-                    <reuse>0.5</reuse>
-                    <max-hold-time>900</max-hold-time>
-                    <decay-half-life-reachable>300</decay-half-life-reachable>
-                    <decay-half-life-unreachable>900</decay-half-life-unreachable>
-                    <enable>yes</enable>
-                  </entry>
-                </dampening-profile>
-                <routing-options>
-                  <graceful-restart>
-                    <enable>yes</enable>
-                  </graceful-restart>
-                </routing-options>
-              </bgp>
-            </protocol>
-            <interface>
-              <member>ethernet1/1</member>
-              <member>ethernet1/2</member>
-            </interface>
+          <entry name="VR-public">
             <ecmp>
               <algorithm>
                 <ip-modulo/>
               </algorithm>
             </ecmp>
+            <protocol>
+              <bgp>
+                <routing-options>
+                  <graceful-restart>
+                    <enable>yes</enable>
+                  </graceful-restart>
+                </routing-options>
+                <enable>no</enable>
+              </bgp>
+              <rip>
+                <enable>no</enable>
+              </rip>
+              <ospf>
+                <enable>no</enable>
+              </ospf>
+              <ospfv3>
+                <enable>no</enable>
+              </ospfv3>
+            </protocol>
             <routing-table>
               <ip>
                 <static-route>
-                  <entry name="appgw">
+                  <entry name="default">
                     <nexthop>
                       <ip-address>192.168.1.1</ip-address>
                     </nexthop>
                     <bfd>
                       <profile>None</profile>
                     </bfd>
+                    <path-monitor>
+                      <enable>no</enable>
+                      <failure-condition>any</failure-condition>
+                      <hold-time>2</hold-time>
+                    </path-monitor>
                     <interface>ethernet1/1</interface>
                     <metric>10</metric>
                     <destination>0.0.0.0/0</destination>
+                    <route-table>
+                      <unicast/>
+                    </route-table>
+                  </entry>
+                  <entry name="transit">
+                    <nexthop>
+                      <next-vr>VR-private</next-vr>
+                    </nexthop>
+                    <bfd>
+                      <profile>None</profile>
+                    </bfd>
+                    <path-monitor>
+                      <enable>no</enable>
+                      <failure-condition>any</failure-condition>
+                      <hold-time>2</hold-time>
+                    </path-monitor>
+                    <metric>10</metric>
+                    <destination>192.168.5.0/24</destination>
+                    <route-table>
+                      <unicast/>
+                    </route-table>
                   </entry>
                 </static-route>
               </ip>
             </routing-table>
+            <interface>
+              <member>ethernet1/1</member>
+            </interface>
+          </entry>
+          <entry name="VR-private">
+            <ecmp>
+              <algorithm>
+                <ip-modulo/>
+              </algorithm>
+            </ecmp>
+            <protocol>
+              <bgp>
+                <routing-options>
+                  <graceful-restart>
+                    <enable>yes</enable>
+                  </graceful-restart>
+                </routing-options>
+                <enable>no</enable>
+              </bgp>
+              <rip>
+                <enable>no</enable>
+              </rip>
+              <ospf>
+                <enable>no</enable>
+              </ospf>
+              <ospfv3>
+                <enable>no</enable>
+              </ospfv3>
+            </protocol>
+            <routing-table>
+              <ip>
+                <static-route>
+                  <entry name="default">
+                    <nexthop>
+                      <next-vr>VR-public</next-vr>
+                    </nexthop>
+                    <bfd>
+                      <profile>None</profile>
+                    </bfd>
+                    <path-monitor>
+                      <enable>no</enable>
+                      <failure-condition>any</failure-condition>
+                      <hold-time>2</hold-time>
+                    </path-monitor>
+                    <metric>10</metric>
+                    <destination>0.0.0.0/0</destination>
+                    <route-table>
+                      <unicast/>
+                    </route-table>
+                  </entry>
+                  <entry name="healthprobe">
+                    <nexthop>
+                      <ip-address>192.168.2.1</ip-address>
+                    </nexthop>
+                    <bfd>
+                      <profile>None</profile>
+                    </bfd>
+                    <path-monitor>
+                      <enable>no</enable>
+                      <failure-condition>any</failure-condition>
+                      <hold-time>2</hold-time>
+                    </path-monitor>
+                    <interface>ethernet1/2</interface>
+                    <metric>10</metric>
+                    <destination>168.63.129.16/32</destination>
+                    <route-table>
+                      <unicast/>
+                    </route-table>
+                  </entry>
+                </static-route>
+              </ip>
+            </routing-table>
+            <interface>
+              <member>ethernet1/2</member>
+            </interface>
           </entry>
         </virtual-router>
       </network>
@@ -338,6 +444,7 @@
             </dhcp-client>
           </type>
           <server-verification>yes</server-verification>
+          <hostname>PA-VM</hostname>
         </system>
         <setting>
           <config>
@@ -371,7 +478,7 @@
           <rulebase>
             <security>
               <rules>
-                <entry name="allow_http">
+                <entry name="allow_http_s">
                   <to>
                     <member>any</member>
                   </to>
@@ -395,12 +502,75 @@
                   </application>
                   <service>
                     <member>service-http</member>
+                    <member>service-https</member>
                   </service>
                   <hip-profiles>
                     <member>any</member>
                   </hip-profiles>
                   <action>allow</action>
                   <log-start>yes</log-start>
+                  <disabled>no</disabled>
+                </entry>
+                <entry name="outbound">
+                  <to>
+                    <member>untrust</member>
+                  </to>
+                  <from>
+                    <member>trust</member>
+                  </from>
+                  <source>
+                    <member>any</member>
+                  </source>
+                  <destination>
+                    <member>any</member>
+                  </destination>
+                  <source-user>
+                    <member>any</member>
+                  </source-user>
+                  <category>
+                    <member>any</member>
+                  </category>
+                  <application>
+                    <member>any</member>
+                  </application>
+                  <service>
+                    <member>any</member>
+                  </service>
+                  <hip-profiles>
+                    <member>any</member>
+                  </hip-profiles>
+                  <action>allow</action>
+                  <log-start>no</log-start>
+                </entry>
+                <entry name="allow_ping">
+                  <to>
+                    <member>any</member>
+                  </to>
+                  <from>
+                    <member>any</member>
+                  </from>
+                  <source>
+                    <member>any</member>
+                  </source>
+                  <destination>
+                    <member>any</member>
+                  </destination>
+                  <source-user>
+                    <member>any</member>
+                  </source-user>
+                  <category>
+                    <member>any</member>
+                  </category>
+                  <application>
+                    <member>ping</member>
+                  </application>
+                  <service>
+                    <member>any</member>
+                  </service>
+                  <hip-profiles>
+                    <member>any</member>
+                  </hip-profiles>
+                  <action>allow</action>
                   <disabled>yes</disabled>
                 </entry>
                 <entry name="deny_all">
@@ -432,7 +602,7 @@
                     <member>any</member>
                   </hip-profiles>
                   <action>deny</action>
-                  <log-start>yes</log-start>
+                  <log-start>no</log-start>
                 </entry>
               </rules>
             </security>
@@ -462,6 +632,29 @@
                     <translated-address>internal-load-balancer-IP</translated-address>
                   </destination-translation>
                   <service>any</service>
+                </entry>
+                <entry name="outbound nat">
+                  <source-translation>
+                    <dynamic-ip-and-port>
+                      <interface-address>
+                        <interface>ethernet1/1</interface>
+                      </interface-address>
+                    </dynamic-ip-and-port>
+                  </source-translation>
+                  <to>
+                    <member>untrust</member>
+                  </to>
+                  <from>
+                    <member>trust</member>
+                  </from>
+                  <source>
+                    <member>any</member>
+                  </source>
+                  <destination>
+                    <member>any</member>
+                  </destination>
+                  <service>any</service>
+                  <disabled>no</disabled>
                 </entry>
               </rules>
             </nat>
